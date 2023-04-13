@@ -48,8 +48,59 @@ npm start
 5. Open your web browser and visit `http://localhost:3000` to experience the Gund Gallery Immersive project.
 
 ## Project Structure
-
-Please refer to the [project structure section](https://github.com/your-username/gund-gallery-immersive/blob/main/README.md#project-structure) in the main README file for a detailed explanation of the project organization.
+```
+project-root/
+│
+├── server/
+│   ├── index.js (main server file)
+│   ├── config/
+│   │   └── config.js (server configuration)
+│   │
+│   ├── api/
+│   │   ├── routes.js (API routes)
+│   │   └── controllers/
+│   │       ├── page1Controller.js
+│   │       ├── page2Controller.js
+│   │       ├── page3Controller.js
+│   │       ├── page4Controller.js
+│   │       └── page5Controller.js
+│   │
+│   └── socket/
+│       ├── socketManager.js (socket.io manager)
+│       └── events/
+│           ├── event1.js
+│           ├── event2.js
+│           └── ... (other socket.io event files)
+│
+├── public/
+│   ├── css/
+│   │   ├── main.css (global styles)
+│   │   ├── page1.css
+│   │   ├── page2.css
+│   │   ├── page3.css
+│   │   ├── page4.css
+│   │   └── page5.css
+│   │
+│   ├── js/
+│   │   ├── p5/
+│   │   │   └── p5.min.js (p5.js library)
+│   │   ├── main.js (global scripts)
+│   │   ├── page1.js
+│   │   ├── page2.js
+│   │   ├── page3.js
+│   │   ├── page4.js
+│   │   └── page5.js
+│   │
+│   ├── index.html
+│   ├── page1.html
+│   ├── page2.html
+│   ├── page3.html
+│   ├── page4.html
+│   └── page5.html
+│
+├── package.json
+└── README.md
+```
 
 ## Contributing
 
