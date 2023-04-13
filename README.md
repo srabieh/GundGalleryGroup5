@@ -49,7 +49,7 @@ npm start
 
 ## Project Structure
 ```
-project-root/
+GundGalleryGroup5/
 │
 ├── server/
 │   ├── index.js (main server file)
