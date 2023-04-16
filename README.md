@@ -50,56 +50,38 @@ npm start
 ## Project Structure
 ```
 GundGalleryGroup5/
-│
-├── server/
-│   ├── index.js (main server file)
-│   ├── config/
-│   │   └── config.js (server configuration)
-│   │
-│   ├── api/
-│   │   ├── routes.js (API routes)
-│   │   └── controllers/
-│   │       ├── page1Controller.js
-│   │       ├── page2Controller.js
-│   │       ├── page3Controller.js
-│   │       ├── page4Controller.js
-│   │       └── page5Controller.js
-│   │
-│   └── socket/
-│       ├── socketManager.js (socket.io manager)
-│       └── events/
-│           ├── event1.js
-│           ├── event2.js
-│           └── ... (other socket.io event files)
-│
-├── public/
-│   ├── css/
-│   │   ├── main.css (global styles)
-│   │   ├── page1.css
-│   │   ├── page2.css
-│   │   ├── page3.css
-│   │   ├── page4.css
-│   │   └── page5.css
-│   │
-│   ├── js/
-│   │   ├── p5/
-│   │   │   └── p5.min.js (p5.js library)
-│   │   ├── main.js (global scripts)
-│   │   ├── page1.js
-│   │   ├── page2.js
-│   │   ├── page3.js
-│   │   ├── page4.js
-│   │   └── page5.js
-│   │
-│   ├── index.html
-│   ├── page1.html
-│   ├── page2.html
-│   ├── page3.html
-│   ├── page4.html
-│   └── page5.html
-│
+├── README.md
+├── controllers
+│   ├── adminController.js
+│   ├── clientController.js
+│   ├── installationController.js
+│   ├── userController.js
+│   └── wordController.js
+├── models
+│   ├── adminModel.js
+│   ├── clientModel.js
+│   ├── installationModel.js
+│   ├── userModel.js
+│   └── wordModel.js
 ├── package.json
-└── README.md
+├── routes
+│   ├── adminRoutes.js
+│   ├── clientRoutes.js
+│   ├── installationRoutes.js
+│   ├── userRoutes.js
+│   └── wordRoutes.js
+├── server.js
+└── views
+    ├── adminPanel.ejs
+    ├── css
+    │   └── style.css
+    ├── error.ejs
+    ├── installation.ejs
+    ├── js
+    │   ├── survey.js
+    │   └── wordCloud.js
+    ├── survey.ejs
+    └── wordCloud.ejs
 ```
 
 ## Contributing
