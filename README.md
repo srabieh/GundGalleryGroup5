@@ -5,7 +5,7 @@ This project provides an immersive experience of the Gund Gallery, using p5.js f
 ## Overview
 
 1. **Begin your Immersive Gund Gallery Experience!** - Browse through the virtual gallery and enjoy the interactive features for each artwork.
-2. **Scan QR to fully experience Artificial Rock #85** - Scan a QR code to unlock additional content and an interactive experience for specific artworks.
+2. **Scan QR to fully experience each installation** - Scan a QR code to unlock additional content and an interactive experience for specific artworks.
 3. **Word Cloud** - An interactive word cloud visualization built using p5.js.
     - Words are weighted in size according to the number of appearances.
     - Words are colored based on the predominant colors in the painting.
