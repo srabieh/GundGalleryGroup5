@@ -1,0 +1,20 @@
+{
+  "name": "gundgallerygroup5",
+  "version": "1.0.0",
+  "description": "This project provides an immersive experience of the Gund Gallery, using p5.js for interactive visualizations and a Node.js server with Socket.io and RESTful APIs.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srabieh/GundGalleryGroup5.git"
+  },
+  "author": " <kenyon>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/srabieh/GundGalleryGroup5/issues"
+  },
+  "homepage": "https://github.com/srabieh/GundGalleryGroup5#readme"
+}
