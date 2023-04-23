@@ -10,8 +10,10 @@ install_deps:
 	npm install
 
 move_client_side_files:
-	mkdir -p $(GUND_DIR)
-	cp $(CLIENT_SIDE_FILES) $(GUND_DIR)
+	-mkdir -p $(GUND_DIR)
+	cp views/*.ejs /var/www/html/GundGalleryGroup5/
+	cp views/css/*.css /var/www/html/GundGalleryGroup5/css/
+	cp views/js/*.js /var/www/html/GundGalleryGroup5/js/
 
 build_server:
 	npm run build
