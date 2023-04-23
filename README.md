@@ -84,44 +84,73 @@ GundGalleryGroup5/
     └── wordCloud.ejs
 ```
 
-## Database
-clients
--------
-The clients table stores information about each client who fills out the survey. The table includes the following columns:
-- id (INT): A unique identifier for each client.
-- name (VARCHAR): The client's name.
-- email (VARCHAR): The client's email address.
-- age (INT): The client's age.
-- gender (VARCHAR): The client's gender.
+## MVC Architecture
+In the Gund Gallery Immersive Experience project, the Model-View-Controller (MVC) pattern is used to establish connections between different components of the application, ensuring efficient communication and proper flow of information. Here is a more detailed explanation of the connections between the models, views, and controllers:
 
-responses
----------
-The responses table stores the responses to the survey for each client. The table includes the following columns:
-- id (INT): A unique identifier for each response.
-- client_id (INT): The ID of the client who filled out the survey (foreign key to the clients table).
-- installation_id (INT): The ID of the installation where the survey was taken (foreign key to the installations table).
-- questions (JSON): A JSON object that stores the questions and their answers for the survey.
+Models to Controllers:
+Models interact with the database and define the data structure and the business logic of the application. When a controller requires data or needs to perform an operation, it communicates with the corresponding model. For example, if the userController needs to retrieve user information, it will call a function from the userModel. Similarly, if the wordController needs to update the count of a word in the word cloud, it will call a function from the wordModel.
+
+Controllers to Views:
+Controllers receive user input from the views and process this input. Based on the input and the results of the communication with the models, controllers update the views accordingly. For example, when the clientController receives input from the survey view (survey.ejs), it may need to process this input, update the clientModel, and then send the updated data back to the view to be displayed. The controllers update the views by rendering a new or updated view and passing the necessary data to be displayed.
+
+Views to Controllers:
+Views are responsible for displaying data provided by the controllers and capturing user input. When a user interacts with the application, the views send the input to the appropriate controller to process. For example, when a user submits a survey, the survey view (survey.ejs) will send the input data to the clientController, which will then process the input, interact with the clientModel, and update the view as needed.
+
+Routes:
+In this project, the routes play a crucial role in connecting the controllers with the views. The route files in the 'routes' directory (adminRoutes.js, clientRoutes.js, installationRoutes.js, userRoutes.js, and wordRoutes.js) define the application's endpoints and map them to the appropriate controller functions.
+
+When a user interacts with the application, the views send HTTP requests to the defined endpoints in the routes. These routes are associated with specific controller functions that handle the request and produce a response. The controller functions process the input, interact with the models as needed, and render the appropriate views with the data.
+
+To summarize, the connections in the MVC pattern work as follows:
+
+1. Views capture user input and send it to controllers through routes.
+2. Controllers process user input, communicate with models, and update views.
+3. Models handle data management, business logic, and database operations.
+
+These connections ensure efficient communication and proper flow of information within the application, resulting in a well-organized and maintainable codebase.
+
+## Database
+### Table Descriptions
 
 admins
-------
-The admins table stores information about the administrators of the application. The table includes the following columns:
-- id (INT): A unique identifier for each admin.
-- username (VARCHAR): The admin's username.
-- password (VARCHAR): The admin's password.
+* id: INT(11) - A unique identifier for each admin (Primary Key).
+* username: VARCHAR(255) - The admin's username.
+* password: VARCHAR(255) - The admin's password.
+* email: VARCHAR(255) - The admin's email address.
+* session_id: VARCHAR(255) - The session ID associated with the admin.
+
+clients
+* id: INT(11) - A unique identifier for each client (Primary Key).
+* name: VARCHAR(255) - The client's name.
+* email: VARCHAR(255) - The client's email address.
+* age: INT(11) - The client's age.
+* gender: VARCHAR(255) - The client's gender.
+* session_id: VARCHAR(255) - The session ID associated with the client.
+* last_submission_date: DATE - The date of the client's last submission (NULL if no submissions have been made).
 
 installations
---------------
-The installations table stores information about the different installations where the survey can be taken. The table includes the following columns:
-- id (INT): A unique identifier for each installation.
-- name (VARCHAR): The name of the installation.
-- location (VARCHAR): The location of the installation.
+* id: INT(11) - A unique identifier for each installation (Primary Key).
+* work_name: VARCHAR(255) - The name of the artwork.
+* artist: VARCHAR(255) - The name of the artist.
+* material_medium: VARCHAR(255) - The material and medium of the artwork.
+* date: VARCHAR(255) - The date the artwork was created.
+* info_short_desc: VARCHAR(255) - A short description of the artwork.
+
+responses
+* id: INT(11) - A unique identifier for each response (Primary Key).
+* client_id: INT(11) - The ID of the client who filled out the survey (Foreign Key to the clients table).
+* installation_id: INT(11) - The ID of the installation where the survey was taken (Foreign Key to the installations table).
+* response_text: LONGTEXT - The response text, stored as a longtext field.
 
 words
------
-The words table stores the words that have been entered into the survey's word cloud. The table includes the following columns:
-- id (INT): A unique identifier for each word.
-- word (VARCHAR): The word that was entered into the word cloud.
-- count (INT): The number of times that the word has been entered into the word cloud.
+* id: INT(11) - A unique identifier for each word (Primary Key).
+* word: VARCHAR(255) - The word that was entered into the word cloud.
+* count: INT(11) - The number of times that the word has been entered into the word cloud (default is 0).
+* installation_id: INT(11) - The ID of the installation associated with the word (Foreign Key to the installations table).
+
+### Relationships
+The responses table has foreign key relationships with both the clients and installations tables. Each response is linked to a specific client and installation.
+The words table has a foreign key relationship with the installations table, linking each word to a specific installation.
 
 ## Contributing
 
