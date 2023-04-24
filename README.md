@@ -49,26 +49,28 @@ npm start
 
 ## Project Structure
 ```
-GundGalleryGroup5/
+GundGalleryGroup5
+├── Makefile
 ├── README.md
 ├── controllers
 │   ├── adminController.js
 │   ├── clientController.js
 │   ├── installationController.js
-│   ├── userController.js
 │   └── wordController.js
+├── db.js
+├── db.sql
 ├── models
 │   ├── adminModel.js
 │   ├── clientModel.js
 │   ├── installationModel.js
-│   ├── userModel.js
+│   ├── responseModel.js
 │   └── wordModel.js
+├── package-lock.json
 ├── package.json
 ├── routes
 │   ├── adminRoutes.js
 │   ├── clientRoutes.js
 │   ├── installationRoutes.js
-│   ├── userRoutes.js
 │   └── wordRoutes.js
 ├── server.js
 └── views
@@ -76,6 +78,7 @@ GundGalleryGroup5/
     ├── css
     │   └── style.css
     ├── error.ejs
+    ├── index.ejs
     ├── installation.ejs
     ├── js
     │   ├── survey.js
