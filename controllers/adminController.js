@@ -3,8 +3,8 @@ const adminModel = require('../models/adminModel');
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const admin = await adminModel.authenticate(username, password);
-        if (typeof admin == adminModel.Admin) {
+        const admin = await adminModel.login(username, password);
+        if (admin instanceof adminModel.Admin) {
             // Set up a session or token-based authentication here
             res.redirect('/');
         } else {

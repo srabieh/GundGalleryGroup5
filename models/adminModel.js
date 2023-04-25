@@ -6,19 +6,24 @@ class Admin {
         this.id = id;
         this.username = username; 
     }
+
+    createToken() {
+
+    }
+
 }
 
-exports.Admin = Admin;
-
-exports.authenticate = async (username, password) => {
+exports.login = async (username, password) => {
     try {
         const result = await db.query('SELECT * FROM admins WHERE username = ?', [username]);
         const user = result[0];
-
+        
         if (user && user.password === password) { // For simplicity, we're using plain-text password comparison. Use a proper hashing method in a real-world application.
-            return new Admin(user.id, user.username);
+            let admin = new Admin(user.id, user.username);
+            // let t = admin.createToken();
+            return admin;
         } else if (user) {
-			return 'Incorrect password.';
+            return 'Incorrect password.';
 		} else {
             return 'Incorrect username or password.';
         }
@@ -28,3 +33,4 @@ exports.authenticate = async (username, password) => {
     }
 };
 
+exports.Admin = Admin;
