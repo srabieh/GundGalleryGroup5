@@ -1,6 +1,6 @@
 // routes/adminRoutes.js
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 // Add your admin route handlers here
 

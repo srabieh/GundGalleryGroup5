@@ -7,10 +7,6 @@ class Admin {
         this.username = username; 
     }
 
-    createToken() {
-
-    }
-
 }
 
 exports.login = async (username, password) => {
@@ -23,9 +19,9 @@ exports.login = async (username, password) => {
             // let t = admin.createToken();
             return admin;
         } else if (user) {
-            return 'Incorrect password.';
+            return 'Incorrect password';
 		} else {
-            return 'Incorrect username or password.';
+            return 'Incorrect username or password';
         }
     } catch (error) {
         console.error(error);

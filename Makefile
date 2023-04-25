@@ -1,10 +1,10 @@
 # Gund Gallery Immersive Experience
 # Makefile
 
-all: install_deps start
+all: start
 
 install_deps:
 	npm install
 
 start:
-	export PORT=5000 && node server.js
+	export PORT=5000 JWT_SECRET=RICKYBOBBY && node server.js

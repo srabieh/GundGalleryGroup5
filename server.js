@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
+const jwt = require("jsonwebtoken");
 const router = express.Router();
+const cookieParser = require("cookie-parser");
+
 const db = require('./db');
 
 const app = express();
@@ -13,6 +16,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 const adminRoutes = require('./routes/adminRoutes');
