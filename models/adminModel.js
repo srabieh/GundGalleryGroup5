@@ -7,9 +7,11 @@ exports.authenticate = async (username, password) => {
         const user = result[0];
 
         if (user && user.password === password) { // For simplicity, we're using plain-text password comparison. Use a proper hashing method in a real-world application.
-            return user;
-        } else {
-            return 'Incorrect password.';
+            return user
+        } else if (user) {
+			return 'Incorrect password'
+		} else {
+            return 'Username does not exist';
         }
     } catch (error) {
         console.error(error);
