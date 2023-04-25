@@ -31,7 +31,7 @@ app.use('/word', wordRoutes);
 
 // Serve index.ejs
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('visitorHomepage');
 });
 
 // Start server
