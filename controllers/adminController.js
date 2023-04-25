@@ -1,30 +1,53 @@
 const adminModel = require("../models/adminModel");
 const jwt = require("jsonwebtoken");
 
+// ---- Index (/admin) (token auth) -----------------------------------------------
 exports.index = async (req, res) => {
     if (req.cookies.access_token) {
         try {
-            const admin = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
+            const admin = new adminModel.Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+            // * E.g. adminModels.getOrSetData(admin) 
 
             return res.render('adminPanel', { 
                 error: null,
                 isAdmin: true, 
                 admin: admin, 
             });
-        } catch {
+        } catch(err) {
+            console.log(err);
             return res.render('adminPanel', { 
                 error: 'Invalid token. Please login again.',
                 isAdmin: false, 
+                admin: null
             });
         }
     }
 
     return res.render('adminPanel', { 
         isAdmin: false, 
-        error: null
+        error: null,
+        admin: null
     });
 };
 
+// ---- getAllWord (test action for admins) -----------------------------------------------------------
+exports.getAllWords = async (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+
+    if (!req.cookies.access_token) {
+        return res.redirect("/");
+    }
+
+    try {
+        const admin = new adminModel.Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+        const words = await adminModel.getAllWords(admin);
+        return res.json(words);
+    } catch {
+        return res.redirect('/admin');
+    }
+};
+
+// ---- Login (/admin/login) -----------------------------------------------------------------
 exports.login = async (req, res) => {
     const { username, password } = req.body;
 
@@ -47,6 +70,7 @@ exports.login = async (req, res) => {
     }
 };
 
+// ---- Logout (/admin/logout) ---------------------------------------------------------------------------
 exports.logout = async (req, res) => {
     return res.clearCookie("access_token")
         .redirect("/admin");

@@ -2,9 +2,9 @@
 const express = require('express');
 const adminController = require('../controllers/adminController');
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 
 router.get('/', adminController.index);
+router.get('/getAllWords', adminController.getAllWords)
 
 router.post('/login', adminController.login);
 router.post('/logout', adminController.logout);
