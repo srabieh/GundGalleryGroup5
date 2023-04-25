@@ -34,6 +34,10 @@ app.get('/', (req, res) => {
     res.render('visitorHomepage');
 });
 
+app.get('/visitorSurvey', (req, res) => {
+    res.render('visitorSurvey');
+});
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
