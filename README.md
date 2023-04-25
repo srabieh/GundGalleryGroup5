@@ -165,8 +165,8 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 
 # Mirrors
-Grant's Mirror:  
-Ricky's Mirror:  
+Grant's Mirror: http://18.116.8.156:5000/  
+Ricky's Mirror: http://3.22.149.75:5000/  
 Sam Rabieh's Mirror:  
 Samyak's Mirror:  
 Vishad's Mirror:  
