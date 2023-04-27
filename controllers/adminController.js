@@ -6,8 +6,7 @@ exports.index = async (req, res) => {
     if (req.cookies.access_token) {
         try {
             const admin = new adminModel.Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
-            // * E.g. adminModels.getOrSetData(admin) 
-
+            
             return res.render('adminPanel', { 
                 error: null,
                 isAdmin: true, 

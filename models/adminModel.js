@@ -1,6 +1,7 @@
 // models/userModel.js
 let db = require('../db');
 
+// ---- Admin class ----------------------------------------------------------------------
 class Admin {
     constructor({ id, username }){
         this.id = id;
@@ -27,6 +28,7 @@ exports.login = async (username, password) => {
     }
 };
 
+// ---- getAllWords (from all installations) -------------------------------------------------------
 exports.getAllWords = async (admin) => {
     try {
         const result = await db.query('SELECT * FROM words');
