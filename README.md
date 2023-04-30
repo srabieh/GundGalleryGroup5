@@ -45,7 +45,7 @@ npm install
 npm start
 ```
 
-5. Open your web browser and visit `http://localhost:3000` to experience the Gund Gallery Immersive project.
+5. Open your web browser and visit `http://localhost:5000` to experience the Gund Gallery Immersive project.
 
 ## Project Structure
 ```
