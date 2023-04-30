@@ -6,4 +6,11 @@ const clientController = require('../controllers/clientController');
 
 // Add your client route handlers here
 
+//Get--------------
+
+
+//Posting---------
+router.post('/createClient', clientController.createClient);
+
+
 module.exports = router;

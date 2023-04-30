@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Survery</title>
+		<!-- add bootstrap -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <title>Survey</title>
     </head>
     <body>
         <span display: inline-block;
@@ -12,5 +14,27 @@
         z-index: -1 data="https://www.saqa.com/sites/default/files/styles/free/public/collection-images/COL-2250.jpg?itok=X8KkEsBu">
         </span>
         Form to be added.  What do you think of that artwork above, though?
+		
+	<!-- stuff for the survey below -->
+	<form action="/client/createClient" method="POST">
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="username" required>
+		<br>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email" required>
+		<br>
+		<label for="age">Age:</label>
+		<input type="age" name="age" id="age" required>
+		<br>
+		<label for="gender">Gender:</label>
+		<input type="text" name="gender" id="gender" required>
+		<br>
+		<button type="submit">Login</button>
+	</form>
+	
+	  <!-- Scripts and Things -->
+	  <script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     </body>
 </html>

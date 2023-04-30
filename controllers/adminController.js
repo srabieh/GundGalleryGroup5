@@ -49,13 +49,12 @@ exports.getAllWords = async (req, res) => {
 // ---- Login (/admin/login) -----------------------------------------------------------------
 exports.login = async (req, res) => {
     const { username, password } = req.body;
-
+	
     try {
         const admin = await adminModel.login(username, password);
 
         if (admin instanceof adminModel.Admin) {
             const token = jwt.sign(JSON.stringify(admin), process.env.JWT_SECRET);
-
             return res.cookie("access_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
