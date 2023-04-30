@@ -3,14 +3,7 @@ const express = require('express');
 const router = express.Router();
 const clientController = require('../controllers/clientController');
 
-
-// Add your client route handlers here
-
-//Get--------------
-
-
-//Posting---------
+// ---- Create new clients or get existing client ---------------------------------------------------------------
 router.post('/createClient', clientController.createClient);
-
 
 module.exports = router;
