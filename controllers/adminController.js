@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
     try {
         const admin = await Admin.login(username, password);
 
-        if (admin instanceof adminModel.Admin) {
+        if (admin instanceof Admin) {
             const token = jwt.sign(JSON.stringify(admin), process.env.JWT_SECRET);
             return res.cookie("access_token", token, {
                 httpOnly: true,

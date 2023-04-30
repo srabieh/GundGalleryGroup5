@@ -9,7 +9,7 @@ class Admin {
     }
     
     // ---- Returns an Admin object ----------------------------------------------------------
-    static async login (username, password) {
+    static async login(username, password) {
         try {
             const result = await db.query('SELECT * FROM admins WHERE username = ?', [username]);
     
@@ -26,7 +26,8 @@ class Admin {
             throw error;
         }
     }
-
+    
+    // todo: should probably return an array of word models.
     async getAllWords() {
         try {
             const result = await db.query('SELECT * FROM words');

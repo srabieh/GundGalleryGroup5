@@ -3,53 +3,44 @@ let db = require('../db');
 
 //Define the Class--------------------------------
 class Client {
-    constructor({ id, name, email, age, gender }){
+    constructor({ id, name, email, age, gender }) {
         this.id = id;
         this.name = name; 
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
     }
-}
 
+	static async isClient(name, email) {
+		const [rows, fields] = await db.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
+		return rows.length == 0;
+	}
 
+	static async createClient(clientData) {
+		try {
+			//Checking if person is in database. If yes than create client with their info, if not hen add them.
+			let exists = await this.isClient(clientData.name, clientData.email);
 
+			if(exists) { 
+				return false; // TODO: return the existing client
+			}
 
-
-//Create a client, and add them to database.
-exports.createClient = async (name, email, age, gender) => {
-    try {
-		//Checking if person is in database. If yes than create client with their info, if no then add them.
-		const clientExists = await db.checkClient(name, email);
-		console.log(clientExists);
-		if(clientExists){
-			console.log("Client Exists");
-			//Create new client
-			let client = new Client({
-			  id: 1,
-			  name: name,
-			  email: email,
-			  age: age,
-			  gender: gender
-			});
+			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
+			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
+			try {
+				const rows = await db.query(sql, params);
+				return new Client(clientData);
+			} 
+			catch (err) {
+				console.error(err);
+				throw err;
+			}
 			return client;
-		} else{
-			console.log("Client does not exit... Adding them");
-			await db.insertClient(name,email,age,gender);
-			let client = new Client({
-			  id: 1,
-			  name: name,
-			  email: email,
-			  age: age,
-			  gender: gender
-			});
-			return client;
+		} catch(error) {
+			console.error(error);
+			throw error;
 		}
-    }catch(error){
-        console.error(error);
-        throw error;
-    }
-};
-
+	}
+}
 
 exports.Client = Client;
