@@ -12,8 +12,8 @@ class Client {
     }
 
 	static async isClient(name, email) {
-		const [rows, fields] = await db.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
-		return rows.length == 0;
+		const results = await db.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
+		return results == [];
 	}
 
 	static async createClient(clientData) {
@@ -22,13 +22,14 @@ class Client {
 			let exists = await this.isClient(clientData.name, clientData.email);
 
 			if(exists) { 
-				return false; // TODO: return the existing client
+				return false; 
 			}
 
 			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
 			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
 			try {
-				const rows = await db.query(sql, params);
+				const insert = await db.query(sql, params);
+				const 
 				return new Client(clientData);
 			} 
 			catch (err) {

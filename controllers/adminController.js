@@ -6,33 +6,32 @@ exports.index = async (req, res) => {
     if (req.cookies.access_token) {
         try {
             const admin = new Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
-            // * E.g. adminModels.getOrSetData(admin) 
 
-            return res.render('adminPanel', { 
-                error: null,
+            return res.render("admin", { 
                 isAdmin: true, 
                 admin: admin, 
+                error: null
             });
         } catch(err) {
             console.log(err);
-            return res.render('adminPanel', { 
-                error: 'Invalid token. Please login again.',
+            return res.render("admin", { 
                 isAdmin: false, 
-                admin: null
+                admin: null,
+                error: "Invalid token. Please login again."
             });
         }
     }
 
-    return res.render('adminPanel', { 
+    return res.render("admin", { 
         isAdmin: false, 
-        error: null,
-        admin: null
+        admin: null,
+        error: null
     });
 };
 
 // ---- getAllWord (test action for admins) -----------------------------------------------------------
 exports.getAllWords = async (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+    res.set("Access-Control-Allow-Origin", "*");
 
     if (!req.cookies.access_token) {
         return res.redirect("/");
@@ -43,7 +42,7 @@ exports.getAllWords = async (req, res) => {
         const words = await admin.getAllWords();
         return res.json(words);
     } catch {
-        return res.redirect('/admin');
+        return res.redirect("/admin");
     }
 };
 
@@ -62,7 +61,7 @@ exports.login = async (req, res) => {
             })
             .redirect("/admin");
         } else {
-            return res.render(`adminPanel`, { isAdmin: false, error: admin });
+            return res.render(`admin`, { isAdmin: false, error: admin });
         }
     } catch (error) {
         return res.status(500).send("Internal server error");
