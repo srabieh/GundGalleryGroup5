@@ -3,7 +3,7 @@ const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
     host: 'localhost',
-    user: process.env.DB_USERNAME,
+    user: 'root',
     password: process.env.DB_PASSWORD,
     database: 'gund',
     connectionLimit: 5,
@@ -31,7 +31,7 @@ async function query(sql, params) {
 //Insert a client into the database
 async function insertClient(name, email, age, gender) {
     let conn;
-	console.log("inserClient() is running");
+	console.log("insertClient() is running");
     try {
         conn = await pool.getConnection();
         const sql = `INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)`;
@@ -58,16 +58,34 @@ checkClient = async (email) => {
       // client does not exist
       return false;
     }
-  } catch (err) {
-    throw err;
+  } catch (error) {
+    throw error;
   } finally {
     if (conn) conn.release();
   }
 };
 
 
+
+async function getClientIdByEmail(email) {
+  try {
+    const rows = await query(`SELECT id FROM clients WHERE email = ?`, [email]);
+    if (rows.length > 0) {
+	  console.log("Client ID was Found: " + rows[0].id);
+      return rows[0].id;
+    } else {
+      console.log(`No client with email ${email} found.`);
+      return null;
+    }
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+
 module.exports = {
     query,
 	insertClient,
-	checkClient
+	checkClient,
+	getClientIdByEmail
 };

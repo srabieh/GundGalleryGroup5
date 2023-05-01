@@ -9,38 +9,41 @@ class Client {
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
-    }
+}
 
 
 //Create a client, and add them to database.
-static async createClient (name, email, age, gender){
+static async createClient(name, email, age, gender){
     try {
+		console.log("createClient is running");
 		//Checking if person is in database. If yes than create client with their info, if no then add them.
-		console.log("createClient is running")
-		const clientExists = await db.checkClient(name, email);
-		console.log(clientExists);
+		let clientExists = await db.checkClient(email);
 		if(clientExists){
-			console.log("Client Exists");
-			//Create new client
-			let client = new Client({
-			  id: 1,
+			let clientID = await db.getClientIdByEmail(email);
+			console.log("Client Exists: Welcome back " + name);
+			//Create new client object using data in database.
+			let newClient = new Client({
+			  id: clientID,
 			  name: name,
 			  email: email,
 			  age: age,
 			  gender: gender
 			});
-			return client;
-		} else{
-			console.log("Client does not exit... Adding them");
+			return newClient;
+		}else{
+			//Client isn't already in database so we add them and then make the client object.
 			await db.insertClient(name,email,age,gender);
-			let client = new Client({
-			  id: 1,
+			console.log(name + " has been added to the database");
+			let clientID = await db.getClientIdByEmail(email);
+			//Create newClient:
+			let newClient = new Client({
+			  id: clientID,
 			  name: name,
 			  email: email,
 			  age: age,
 			  gender: gender
 			});
-			return client;
+			return newClient;
 		}
     }catch(error){
         console.error(error);

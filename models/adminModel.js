@@ -15,6 +15,7 @@ class Admin {
     
             if (result[0] && result[0].password === password) { // For simplicity, we're using plain-text password comparison. Use a proper hashing method in a real-world application.
                 let admin = new Admin(result[0]);
+				console.log(result[0]);
                 return admin;
             } else if (result[0]) {
                 return 'Incorrect password';
@@ -35,7 +36,7 @@ class Admin {
             console.error(error);
             throw error;
         }
-    };
-}
+    }
+};
 
 module.exports = Admin;
