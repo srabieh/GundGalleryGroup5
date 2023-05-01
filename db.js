@@ -30,25 +30,44 @@ async function query(sql, params) {
 
 //Insert a client into the database
 async function insertClient(name, email, age, gender) {
-  console.log("insertClient is running:");
-  const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
-  const params = [name, email, age, gender];
-  try {
-    const rows = await pool.query(sql, params);
-    return rows;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
+    let conn;
+	console.log("inserClient() is running");
+    try {
+        conn = await pool.getConnection();
+        const sql = `INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)`;
+        const result = await conn.query(sql, [name, email, age, gender]);
+        console.log(`Added client ${name} to database`);
+    } catch (error) {
+        throw error;
+    } finally {
+        if (conn) conn.release();
+    }
 }
 
-//Check if a client exists in the database:
-async function checkClient(name, email) {
+//This function takes in the email of the client as a parameter, connects to the MySQL database, and executes a SELECT query to check if a row with that email already exists in the clients table. If a row exists, the function returns true, otherwise it returns false. Note that this function assumes that the clients table has a column called email that stores the email addresses of clients.
+checkClient = async (email) => {
+  let conn;
   console.log("checkClient is running");
-  const [rows, fields] = await pool.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
-  return rows.length > 0;
-}
+  try {
+    conn = await pool.getConnection();
+    const rows = await conn.query(`SELECT * FROM clients WHERE email='${email}'`);
+    if (rows.length > 0) {
+      // client already exists
+      return true;
+    } else {
+      // client does not exist
+      return false;
+    }
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) conn.release();
+  }
+};
+
 
 module.exports = {
-    query
+    query,
+	insertClient,
+	checkClient
 };

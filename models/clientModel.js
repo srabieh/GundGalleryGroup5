@@ -10,16 +10,13 @@ class Client {
 		this.age = age;
 		this.gender = gender;
     }
-}
-
-
-
 
 
 //Create a client, and add them to database.
-exports.createClient = async (name, email, age, gender) => {
+static async createClient (name, email, age, gender){
     try {
 		//Checking if person is in database. If yes than create client with their info, if no then add them.
+		console.log("createClient is running")
 		const clientExists = await db.checkClient(name, email);
 		console.log(clientExists);
 		if(clientExists){
@@ -49,7 +46,7 @@ exports.createClient = async (name, email, age, gender) => {
         console.error(error);
         throw error;
     }
+}
 };
 
-
-exports.Client = Client;
+module.exports = Client;
