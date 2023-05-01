@@ -5,8 +5,9 @@ const jwt = require("jsonwebtoken");
 exports.index = async (req, res) => {
     if (req.cookies.access_token) {
         try {
-            const admin = new adminModel.Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
-            
+            const admin = new Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+            // * E.g. adminModels.getOrSetData(admin) 
+
             return res.render('adminPanel', { 
                 error: null,
                 isAdmin: true, 
@@ -38,8 +39,8 @@ exports.getAllWords = async (req, res) => {
     }
 
     try {
-        const admin = new adminModel.Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
-        const words = await adminModel.getAllWords(admin);
+        const admin = new Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+        const words = await admin.getAllWords();
         return res.json(words);
     } catch {
         return res.redirect('/admin');
@@ -51,7 +52,7 @@ exports.login = async (req, res) => {
     const { username, password } = req.body;
 	
     try {
-        const admin = await adminModel.login(username, password);
+        const admin = await Admin.login(username, password);
 
         if (admin instanceof adminModel.Admin) {
             const token = jwt.sign(JSON.stringify(admin), process.env.JWT_SECRET);

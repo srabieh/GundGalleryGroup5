@@ -3,8 +3,8 @@ const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'GrantCulbertson',
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
     database: 'gund',
     connectionLimit: 5,
     waitForConnections: true
@@ -26,7 +26,7 @@ async function query(sql, params) {
     }
 }
 
-//Client Functions----------------------------------
+// ---- Client Functions -----------------------------------------------------------------
 
 //Insert a client into the database
 async function insertClient(name, email, age, gender) {
@@ -49,10 +49,6 @@ async function checkClient(name, email) {
   return rows.length > 0;
 }
 
-
-
 module.exports = {
     query
 };
-
-
