@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const cookieParser = require("cookie-parser");
 
+const Client = require('./models/clientModel.js').Client;
+
 const db = require('./db');
 
 const app = express();
@@ -31,11 +33,34 @@ app.use('/word', wordRoutes);
 
 // Serve index.ejs
 app.get('/', (req, res) => {
-    res.render('visitorHomepage');
+    res.render('homepage');
 });
 
-app.get('/visitorSurvey', (req, res) => {
-    res.render('visitorSurvey');
+app.get('/survey', (req, res) => {
+    if (req.cookies.access_token) {
+        try {
+            const client = new Client(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+
+            return res.render("survey", { 
+                isClient: true, 
+                client: client, 
+                error: null
+            });
+        } catch(err) {
+            console.log(err);
+            return res.render("survey", { 
+                isClient: false, 
+                client: null,
+                error: "Invalid token. Please login again."
+            });
+        }
+    }
+
+    return res.render("survey", { 
+        isClient: false, 
+        client: null,
+        error: null
+    });
 });
 
 // Start server
