@@ -9,7 +9,7 @@ class Client {
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
-}
+};
 
 
 //Create a client, and add them to database.
@@ -21,7 +21,7 @@ static async createClient(name, email, age, gender){
 		if(clientExists){
 			let clientID = await db.getClientIdByEmail(email);
 			console.log("Client Exists: Welcome back " + name);
-			//Create new client object using data in database.
+			//Create new client object using data passed and ID from database.
 			let newClient = new Client({
 			  id: clientID,
 			  name: name,
@@ -29,6 +29,7 @@ static async createClient(name, email, age, gender){
 			  age: age,
 			  gender: gender
 			});
+			console.log("newClient is now being returned");
 			return newClient;
 		}else{
 			//Client isn't already in database so we add them and then make the client object.
@@ -43,13 +44,16 @@ static async createClient(name, email, age, gender){
 			  age: age,
 			  gender: gender
 			});
+			console.log("newClient is now being returned");
 			return newClient;
 		}
     }catch(error){
         console.error(error);
         throw error;
     }
-}
+};
+
+
 };
 
 module.exports = Client;

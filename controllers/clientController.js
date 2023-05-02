@@ -14,19 +14,13 @@ exports.createClient = async (req , res) => {
 		console.log("Attempting to Create Client:");
 		const newClient = await clientModel.createClient(name , email , age , gender);
 		//If adding the client was successful then continue and assign a token.
-		console.log(newClient instanceof clientModel.Client);
 		if(newClient instanceof clientModel.Client){
 			console.log("Adding client was succesful");
-			const token = jwt.sign(JSON.stringify(newClient), process.env.JWT_SECRET);
-			return res.cookie("access_token", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-            })
-            .redirect("/visitorSurvey");
+		}else{
+			console.log("meow");
 		}
-		
-	} catch(error){
-			console.log("Error in clientController createClient");
+	}catch(error){
+			console.log("Error in clientController createClient()");
 			return res.status(500).send("CreateClient Error");
 	}
 }
