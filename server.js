@@ -36,6 +36,13 @@ app.get('/', (req, res) => {
     res.render('homepage');
 });
 
+//To access the visitor survey test environment:
+app.get('/visitorSurvey', (req, res) => {
+    res.render('visitorSurvey');
+});
+
+
+
 app.get('/survey', (req, res) => {
     if (req.cookies.access_token) {
         try {
