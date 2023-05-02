@@ -3,57 +3,45 @@ let db = require('../db');
 
 //Define the Class--------------------------------
 class Client {
-    constructor({ id, name, email, age, gender }){
+    constructor({ id, name, email, age, gender }) {
         this.id = id;
         this.name = name; 
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
-};
+	}
 
+	static async isClient(name, email) {
+		const results = await db.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
+		return results == [];
+	}
 
-//Create a client, and add them to database.
-static async createClient(name, email, age, gender){
-    try {
-		console.log("createClient is running");
-		//Checking if person is in database. If yes than create client with their info, if no then add them.
-		let clientExists = await db.checkClient(email);
-		if(clientExists){
-			let clientID = await db.getClientIdByEmail(email);
-			console.log("Client Exists: Welcome back " + name);
-			//Create new client object using data passed and ID from database.
-			let newClient = new Client({
-			  id: clientID,
-			  name: name,
-			  email: email,
-			  age: age,
-			  gender: gender
-			});
-			console.log("newClient is now being returned");
-			return newClient;
-		}else{
-			//Client isn't already in database so we add them and then make the client object.
-			await db.insertClient(name,email,age,gender);
-			console.log(name + " has been added to the database");
-			let clientID = await db.getClientIdByEmail(email);
-			//Create newClient:
-			let newClient = new Client({
-			  id: clientID,
-			  name: name,
-			  email: email,
-			  age: age,
-			  gender: gender
-			});
-			console.log("newClient is now being returned");
-			return newClient;
+	static async createClient(clientData) {
+		try {
+			//Checking if person is in database. If yes than create client with their info, if not hen add them.
+			let exists = await this.isClient(clientData.name, clientData.email);
+
+			if(exists) { 
+				return false; 
+			}
+
+			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
+			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
+			try {
+				const insert = await db.query(sql, params);
+				const 
+				return new Client(clientData);
+			} 
+			catch (err) {
+				console.error(err);
+				throw err;
+			}
+			return client;
+		} catch(error) {
+			console.error(error);
+			throw error;
 		}
-    }catch(error){
-        console.error(error);
-        throw error;
-    }
-};
+	}
+}
 
-
-};
-
-module.exports = Client;
+exports.Client = Client;
