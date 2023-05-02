@@ -11,7 +11,6 @@ exports.index = async (req, res) => {
 
 // ---- Create a client and login --------------------------------------------------------
 exports.createClient = async (req , res) => {
-
 	const { name , email , age , gender } = req.body;
 	try {		
 		const client = await Client.createClient({name, email, age, gender});

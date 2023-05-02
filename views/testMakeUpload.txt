@@ -1,4 +1,0 @@
-This is a file I will upload to the views folder on the GitHub.
-I'm trying to test whether since we changed the Makefile, anything new will upload 
-to the website, or whether the current Makefile only edits the existing files.
-I don't know whether I want this to work.
