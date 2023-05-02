@@ -35,26 +35,9 @@ app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
-
-
-
-
-//Serve css files
-app.use(express.static('views'));
-
-
-
 // Serve index.ejs
 app.get('/', (req, res) => {
-<<<<<<< HEAD
-    res.render('homepage');
-=======
-<<<<<<< HEAD
-    res.render('visitorHomepage');
-=======
     res.render('index');
->>>>>>> e848e5c (my stuff)
->>>>>>> main
 });
 
 app.get('/survey', (req, res) => {
