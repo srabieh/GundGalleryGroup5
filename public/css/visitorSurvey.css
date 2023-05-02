@@ -2,18 +2,20 @@
 
 /* set the background of the page to be gund gallery */
 body {
-  background-image: url('/images/galleryOutside.jpg');
+  background-image: url('/public/images/galleryOutside.jpg');
   background-size: cover;
 }
 
 /* Things for the animated text */
 .animated-text-container {
-  text-align: center;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
 }
 
 .animated-text {
   position: fixed;
-
+  margin-top: 200px;
   transform: translateX(-50%);
   opacity: 0;
   font-size: 3rem;
