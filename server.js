@@ -40,7 +40,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-//When you go to /survey it will load index if you have a token?
 app.get('/survey', (req, res) => {
     if (req.cookies.access_token) {
         try {
