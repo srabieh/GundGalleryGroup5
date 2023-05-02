@@ -20,20 +20,41 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+// Serve static files
+app.use('/public', express.static(path.join(__dirname, 'public')))
+
 // Routes
 const adminRoutes = require('./routes/adminRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const installationRoutes = require('./routes/installationRoutes');
 const wordRoutes = require('./routes/wordRoutes');
 
+// Routes
 app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
+
+
+
+
+//Serve css files
+app.use(express.static('views'));
+
+
+
 // Serve index.ejs
 app.get('/', (req, res) => {
+<<<<<<< HEAD
     res.render('homepage');
+=======
+<<<<<<< HEAD
+    res.render('visitorHomepage');
+=======
+    res.render('index');
+>>>>>>> e848e5c (my stuff)
+>>>>>>> main
 });
 
 app.get('/survey', (req, res) => {

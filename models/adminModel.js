@@ -36,7 +36,7 @@ class Admin {
             console.error(error);
             throw error;
         }
-    };
-}
+    }
+};
 
 module.exports = Admin;
