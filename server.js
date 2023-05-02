@@ -31,9 +31,18 @@ app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
+
+
+
+
+//Serve css files
+app.use(express.static('views'));
+
+
+
 // Serve index.ejs
 app.get('/', (req, res) => {
-    res.render('homepage');
+    res.render('visitorHomepage');
 });
 
 //To access the visitor survey test environment:
