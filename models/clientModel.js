@@ -22,7 +22,7 @@ class Client {
 		try {
 			//Checking if person is in database. If yes than create client with their info, if not hen add them.
 			let exists = await db.getClientIdByEmail(clientData.email);
-
+			//If the client exists create a new client with given data. Return that client.
 			if(exists) { 
 				console.log("Client already exists in database");
 				return new Client(clientData); 
@@ -30,6 +30,7 @@ class Client {
 
 			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
 			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
+			//If the client doesn't exist we are adding them to the database before making a client object.
 			try {
 				const insert = await db.query(sql, params); 
 				return new Client(clientData);
