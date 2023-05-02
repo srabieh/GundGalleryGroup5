@@ -1,0 +1,7 @@
+/* CSS for the visitorSurvey/ClientIntake page. */
+
+/* set the background of the page to be gund gallery */
+body {
+  background-image: url('/images/galleryOutside.jpg');
+  background-size: cover;
+}
