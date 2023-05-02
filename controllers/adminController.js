@@ -1,4 +1,4 @@
-const adminModel = require("../models/adminModel");
+const Admin = require("../models/adminModel").Admin;
 const jwt = require("jsonwebtoken");
 
 // ---- Index (/admin) (token auth) -----------------------------------------------

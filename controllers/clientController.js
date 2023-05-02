@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.index = async (req, res) => {
 	if (req.cookies.access_token)
 	{
+		// TODO: Verify token
 		return res.status(200);
 	}
 	return res.status(401);
