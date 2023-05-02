@@ -5,3 +5,32 @@ body {
   background-image: url('/images/galleryOutside.jpg');
   background-size: cover;
 }
+
+/* Things for the animated text */
+.animated-text-container {
+  text-align: center;
+}
+
+.animated-text {
+  position: fixed;
+
+  transform: translateX(-50%);
+  opacity: 0;
+  font-size: 3rem;
+  color: white;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.animated-text {
+  animation: fade-up 1s ease-out forwards;
+}

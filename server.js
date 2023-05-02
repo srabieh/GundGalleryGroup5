@@ -57,14 +57,14 @@ app.get('/survey', (req, res) => {
         try {
             const client = new Client(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
 
-            return res.render("survey", { 
+            return res.render("visitorHomepage", { 
                 isClient: true, 
                 client: client, 
                 error: null
             });
         } catch(err) {
             console.log(err);
-            return res.render("survey", { 
+            return res.render("visitorHomepage", { 
                 isClient: false, 
                 client: null,
                 error: "Invalid token. Please login again."
