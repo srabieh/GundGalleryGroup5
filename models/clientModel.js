@@ -46,7 +46,11 @@ class Client {
 		}
 	}
 	
-	
+	//Function for a client to push a comment to the database.
+	async pushComment(comment){
+		
+		
+	}
 }
 
 exports.Client = Client;

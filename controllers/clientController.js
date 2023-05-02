@@ -37,3 +37,9 @@ exports.logout = async (req, res) => {
     return res.clearCookie("access_token")
         .redirect("/");
 };
+
+
+//--- Client pushing a comment to the database ------------------
+exports.pushComment = async (req,res) => {
+	
+};

@@ -1,0 +1,9 @@
+/* set the background of the page to be gund gallery */
+/* body { */
+  /* background-image: url('https://www.google.com/search?client=firefox-b-1-d&q=kenyon+gund+gallery&tbm=isch&sa=X&ved=2ahUKEwjAn9aCidf-AhXpGTQIHfIbB90Q0pQJegQIDBAB&biw=1280&bih=587&dpr=1.5#imgrc=W6p17-l4cxW1KM'); */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+/* } */
+body {
+	background-color: black;
+}
