@@ -32,14 +32,14 @@ class Client {
 			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
 			//If the client doesn't exist we are adding them to the database before making a client object.
 			try {
-				const insert = await db.query(sql, params); 
+				const insert = await db.query(sql, params);
+				console.log(clientData.name + " has been added to the database");
 				return new Client(clientData);
 			} 
 			catch (err) {
 				console.error(err);
 				throw err;
 			}
-			return client;
 		} catch(error) {
 			console.error(error);
 			throw error;
