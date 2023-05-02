@@ -19,6 +19,8 @@ move_client_side_files:
 	cp views/*.txt /var/www/html/gund/
 	cp views/css/*.css /var/www/html/gund/css/
 	cp views/js/*.js /var/www/html/gund/js/
+	cp views/images/*.png /var/www/html/gund/images/
+
 
 
 echo_contents:
