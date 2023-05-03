@@ -25,7 +25,6 @@ class Client {
 			if(client) { 
 				console.log("Client already exists in database");
 				return new Client(client); 
-
 			}
 			
 			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
@@ -39,7 +38,6 @@ class Client {
 				
 				return new Client(client);
 			} catch (err) {
-
 				console.error(err);
 				throw err;
 			}
