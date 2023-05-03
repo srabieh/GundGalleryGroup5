@@ -80,6 +80,6 @@ async function getClientRowByEmail(email) {
 module.exports = {
 	query,
 	insertClient,
-	checkClient,
-	getClientByEmail
+	clientExists,
+	getClientRowByEmail
 };
