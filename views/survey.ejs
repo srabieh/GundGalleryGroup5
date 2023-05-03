@@ -10,16 +10,17 @@
 		<title>Welcome to Gund Gallery!</title>
     </head>
     <body>
+	<!-- stuff for the survey below, survey shows if person is not a client -->
+	<% if (!isClient) { %>
+	<!-- Modal Button -->
 	<div class="animated-text-container">
 	  <h1 class="animated-text">Welcome to Gund Gallery</h1>
 	</div>
-	<!-- Modal Button -->
 	<div class="text-center d-flex align-items-center" style="height: 100vh;">
 		<button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#surveyModal" style="background-color: black">
 			Get Started
 		</button>
 	</div>
-	<!-- stuff for the survey below -->
 	<div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content modal-content-centered text-center d-flex align-items-center">
@@ -47,6 +48,12 @@
 		</div>
 	  </div>
 	</div>
+	
+	<% } else { %>
+	<div class="animated-text-container">
+	  <h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %> </h1>
+	</div>
+	<% } %>
 
 
 	  <!-- Scripts and Things -->
