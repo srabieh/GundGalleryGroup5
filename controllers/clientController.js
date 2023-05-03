@@ -14,7 +14,7 @@ exports.index = async (req, res) => {
 exports.createClient = async (req , res) => {
 	const { name , email , age , gender } = req.body;
 	try {		
-		const client = await Client.createClient({name, email, age, gender});
+		const client = await Client.newClient({name, email, age, gender});
 
 		if(client instanceof Client){
 			const token = jwt.sign(JSON.stringify(client), process.env.JWT_SECRET);
