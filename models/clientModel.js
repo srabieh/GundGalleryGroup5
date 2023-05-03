@@ -20,7 +20,7 @@ class Client {
 	//Function to create a new client when someone comes on to take the survey.
 	static async createClient(clientData) {
 		try {
-			let client = await db.getClientByEmail(clientData.email);
+			let client = await db.getClientRowByEmail(clientData.email);
 
 			if(client) { 
 				console.log("Client already exists in database");
