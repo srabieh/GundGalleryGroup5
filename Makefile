@@ -3,7 +3,7 @@
 
 #Change these for your system
 DB_USERNAME='root'
-DB_PASSWORD='newpassword'
+DB_PASSWORD='GrantCulbertson'
 
 all: install_deps start
 

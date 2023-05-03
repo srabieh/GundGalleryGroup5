@@ -42,7 +42,8 @@ async function insertClient(client) {
 	}
 }
 
-async function clientExists(email) {
+//This function takes in the email of the client as a parameter, connects to the MySQL database, and executes a SELECT query to check if a row with that email already exists in the clients table. If a row exists, the function returns true, otherwise it returns false. Note that this function assumes that the clients table has a column called email that stores the email addresses of clients.
+async function checkClient(email) {
 	let conn;
 	console.log("checkClient is running");
 	try {
@@ -62,10 +63,11 @@ async function clientExists(email) {
 	}
 };
 
-async function getClientRowByEmail(email) {
+async function getClientIdByEmail(email) {
 	try {
-		const rows = await query(`SELECT * FROM clients WHERE email = ?`, [email]);
+		const rows = await query(`SELECT id FROM clients WHERE email = ?`, [email]);
 		if (rows.length > 0) {
+			console.log("Client ID was Found: " + rows[0].id);
 			return rows[0];
 		} else {
 			console.log(`No client with email ${email} found.`);
@@ -80,6 +82,6 @@ async function getClientRowByEmail(email) {
 module.exports = {
 	query,
 	insertClient,
-	clientExists,
-	getClientRowByEmail
+	checkClient,
+	getClientByEmail
 };
