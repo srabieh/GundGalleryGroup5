@@ -18,25 +18,26 @@ class Client {
 	}
 	
 	//Function to create a new client when someone comes on to take the survey.
-	static async newClient(clientData) {
+	static async createClient(clientData) {
 		try {
-			//Checking if person is in database. If yes than create client with their info, if not hen add them.
-			let clientData = await db.getClientIdByEmail(clientData.email);
-			//If client, create a new client with given data. Return that client.
-			if(clientData) { 
+			let client = await db.getClientByEmail(clientData.email);
+
+			if(client) { 
 				console.log("Client already exists in database");
-				return new Client(clientData); 
+				return new Client(client); 
 			}
 			
 			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
 			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
-			//If the client doesn't exist we are adding them to the database before making a client object.
+			
 			try {
 				const insert = await db.query(sql, params);
+				const client = await db.getClientByEmail(clientData.email);
+				
 				console.log(clientData.name + " has been added to the database");
-				return new Client();
-			} 
-			catch (err) {
+				
+				return new Client(client);
+			} catch (err) {
 				console.error(err);
 				throw err;
 			}
@@ -47,9 +48,7 @@ class Client {
 	}
 	
 	//Function for a client to push a comment to the database.
-	async pushComment(comment){
-		
-	}
+	async pushComment(comment) { }
 }
 
 exports.Client = Client;
