@@ -7,7 +7,7 @@ const sketch = (p) => {
   let startIndex = 0;
 
   p.preload = () => {
-    img = p.loadImage("man.jpeg");
+    img = p.loadImage("installation-1.png");
     sourceText = p.loadStrings("db.txt");
   };
 
@@ -15,28 +15,47 @@ const sketch = (p) => {
     p.createCanvas(800, 800);
     response = sourceText.join(' ');
     p.textFont("Courier-Bold");
+
+    img.resize(60, 0);
+    img.loadPixels();
+
+    for (let x = 0; x < img.width; x++) {
+      for (let y = 0; y < img.height; y++) {
+        let index = (x + y * img.width) * 4;
+
+        let r = img.pixels[index];
+        let g = img.pixels[index + 1];
+        let b = img.pixels[index + 2];
+        let a = img.pixels[index + 3];
+
+        if (r > 220 && g > 220 && b > 220 && a > 200) {
+          img.pixels[index] = 0;
+          img.pixels[index + 1] = 0;
+          img.pixels[index + 2] = 0;
+          img.pixels[index + 3] = a;
+        }
+      }
+    }
+
+    img.updatePixels();
   };
 
   p.draw = () => {
     p.background(0);
-    p.frameRate(5);
-    img.resize(60, 0); //method to resize image
+    p.frameRate(6);
 
-    let charIndex = startIndex;
     let w = p.width / img.width;
     let h = p.height / img.height;
     img.loadPixels();
-    //loads the pixel data for the display window into the pixels[] array
 
+    let charIndex = startIndex;
     for (let j = 0; j < img.height; j++) {
       for (let i = 0; i < img.width; i++) {
         const pixelIndex = (i + j * img.width) * 4;
         const r = img.pixels[pixelIndex + 0];
         const g = img.pixels[pixelIndex + 1];
         const b = img.pixels[pixelIndex + 2];
-        //created a pixel array with every pixel having 4 values: r, g, b, a
         const avg = (r + g + b) / 3;
-        //averaging the rgb values in order to create a greyscale color. this identifies the brightest pixels the picture.
 
         p.noStroke();
         p.fill(avg);
@@ -51,7 +70,6 @@ const sketch = (p) => {
     startIndex++;
   };
 
-  //fun with some keypressed functions
   p.keyPressed = () => {
     if (p.background(0)) {
       p.background(256);
@@ -62,3 +80,4 @@ const sketch = (p) => {
 };
 
 new p5(sketch);
+
