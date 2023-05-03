@@ -63,7 +63,7 @@ async function checkClient(email) {
 	}
 };
 
-async function getClientIdByEmail(email) {
+async function getClientRowByEmail(email) {
 	try {
 		const rows = await query(`SELECT id FROM clients WHERE email = ?`, [email]);
 		if (rows.length > 0) {
@@ -83,5 +83,5 @@ module.exports = {
 	query,
 	insertClient,
 	checkClient,
-	getClientByEmail
+	getClientRowByEmail
 };
