@@ -3,12 +3,13 @@ let db = require('../db');
 
 //Define the Class--------------------------------
 class Client {
-	constructor({ id, name, email, age, gender }) {
+	constructor({ id, name, email, age, gender, returning}) {
 		this.id = id;
 		this.name = name; 
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
+		this.returning = returning;
 	}
 	
 	//Function will return true or false as to whether a client already exists:
@@ -25,6 +26,7 @@ class Client {
 			if(client) { 
 				console.log("Client already exists in database");
 				console.log(client);
+				client.returning = true;
 				return new Client(client); 
 			}
 			
@@ -34,7 +36,7 @@ class Client {
 			try {
 				const insert = await db.query(sql, params);
 				const client = await db.getClientRowByEmail(clientData.email);
-				
+				client.returning = false;
 				console.log(clientData.name + " has been added to the database");
 				
 				return new Client(client);

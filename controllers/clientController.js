@@ -14,11 +14,12 @@ exports.index = async (req, res) => {
 exports.createClient = async (req , res) => {
 	const { name , email , age , gender } = req.body;
 	try {		
-		const client = await Client.createClient({name, email, age, gender});
+		let returning = false;
+		const client = await Client.createClient({name, email, age, gender, returning});
 
 		if(client instanceof Client){
+			console.log("Client successfully added, are they returning: " + client.returning)
 			const token = jwt.sign(JSON.stringify(client), process.env.JWT_SECRET);
-
 			return res.cookie("access_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
