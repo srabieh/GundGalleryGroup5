@@ -24,6 +24,7 @@ class Client {
 
 			if(client) { 
 				console.log("Client already exists in database");
+				console.log(client);
 				return new Client(client); 
 			}
 			
@@ -32,7 +33,7 @@ class Client {
 			
 			try {
 				const insert = await db.query(sql, params);
-				const client = await db.getClientByEmail(clientData.email);
+				const client = await db.getClientRowByEmail(clientData.email);
 				
 				console.log(clientData.name + " has been added to the database");
 				

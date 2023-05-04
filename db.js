@@ -65,10 +65,10 @@ async function checkClient(email) {
 
 async function getClientRowByEmail(email) {
 	try {
-		const rows = await query(`SELECT id FROM clients WHERE email = ?`, [email]);
+		const rows = await query(`SELECT * FROM clients WHERE email = ?`, [email]);
 		if (rows.length > 0) {
 			console.log("Client ID was Found: " + rows[0].id);
-			return rows[0];
+			return {...rows[0]};
 		} else {
 			console.log(`No client with email ${email} found.`);
 			return null;
