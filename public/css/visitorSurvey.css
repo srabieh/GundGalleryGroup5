@@ -6,6 +6,10 @@ body {
   background-size: cover;
 }
 
+h1 {
+	color:white;
+}
+
 /* Hyptohetically this makes it stay centered on the phone, I don't think it actually  does anything. */
 @media only screen and (max-width: 768px) and (orientation: portrait) {
   .animated-text {
