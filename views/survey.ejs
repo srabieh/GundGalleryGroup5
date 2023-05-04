@@ -50,11 +50,10 @@
 		<% } else { %>
 			<div class="animated-text-container">
 				<h1 class="animated-text"> Welcome to the Gallery, <%= client.name %> </h1>
-			</div>
-			<h1>Camera Test</h1>
 			<form id="qr-reader-form" action="/scan" method="POST" enctype="multipart/form-data">
 				<input id="qr-reader" type="file" name="image" accept="image/*" capture="environment">
 			</form>
+			</div>
 		<% } %>
 
 		  <!-- Scripts and Things -->
