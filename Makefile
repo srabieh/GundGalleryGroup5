@@ -3,8 +3,8 @@
 
 #Change these for your system
 DB_USERNAME='root'
-DB_PASSWORD='GrantCulbertson'
-HOST = '18.116.8.156'
+DB_PASSWORD='newpassword'
+HOST = 'localhost'
 
 all: install_deps start
 
