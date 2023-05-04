@@ -8,7 +8,7 @@ const installationController = require('../controllers/installationController');
 
 //gets
 router.get('/', installationController.index);
-router.get('/createPainting', installationController.createPainting);
+router.post('/createPainting', installationController.createPainting);
 
 //posts
 

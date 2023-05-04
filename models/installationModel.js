@@ -4,19 +4,21 @@ const db = require('../db');
 //class definition
 class Installation {
 
-	constructor({id}) {
+	constructor({id , work_name , artist, material_medium, date, info_short_desc}) {
 		this.id = id;
-		this.work_name;
-		this.artist;
-		this.material_medium;
-		this.date;
-		this.info_short_desc;
+		this.work_name = work_name;
+		this.artist = artist;
+		this.material_medium = material_medium;
+		this.date = date;
+		this.info_short_desc = info_short_desc;
 	}
 	
 //Create a painting model with all the information.  
-	static async createPainting(paintingData){
+	static async createPainting(id){
 		try{
-			let painting = await db.getPaintingRowById(paintingData)
+			console.log("createPainting is Running in Model, ID = " + id);
+			let painting = await db.getPaintingRowById(id);
+			console.log(painting);
 			if(painting){
 				return new Installation(painting);
 			}

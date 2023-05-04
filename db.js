@@ -79,9 +79,10 @@ async function getClientRowByEmail(email) {
 	}
 }
 
-async function getPaintingRowById(email) {
+async function getPaintingRowById(id) {
 	try {
 		const rows = await query(`SELECT * FROM installations WHERE id = ?`, [id]);
+		console.log("getPaintingRowById is running.")
 		if (rows.length > 0) {
 			console.log("Client ID was Found: " + rows[0].id);
 			return {...rows[0]};

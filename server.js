@@ -9,6 +9,7 @@ const fs = require('fs')
 const QrCode = require('qrcode-reader');
 
 const Client = require('./models/clientModel.js').Client;
+const Installation =  require('./models/installationModel.js').Installation;
 
 const db = require('./db');
 
@@ -50,8 +51,31 @@ app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
 
-app.get('/testPainting', (req,res) => {
-	res.render('testPainting')
+app.get('/testPainting', (req, res) => {
+    if (req.cookies.access_token) {
+        try {
+            const installation = new Installation(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+
+            return res.render("testPainting", { 
+                isInstallation: true, 
+                installation: installation, 
+                error: null
+            });
+        } catch(err) {
+            console.log(err);
+            return res.render("testPainting", { 
+                isInstallation: false, 
+                installation: null,
+                error: "Invalid token. Please login again."
+            });
+        }
+    }
+
+    return res.render("testPainting", { 
+        isInstallation: false, 
+        installation: null,
+        error: null
+    });
 });
 
 // Serve index.ejs

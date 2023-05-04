@@ -10,6 +10,12 @@
 	<title>Welcome to Gund Gallery!</title>
 	</head>
     <body>
+			<% if (!isInstallation) { %>
+			<div class="text-center d-flex align-items-center" style="height: 100vh;">
+				<button type="button" class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#surveyModal" style="background-color: black">
+					Get Started
+				</button>
+			</div>
 			<div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content modal-content-centered text-center d-flex align-items-center">
@@ -27,6 +33,10 @@
 					</div>
 				</div>
 			</div>
+			<% } else { %>
+			
+			<h1> Nice, <%= installation.info_short_desc%> </h1>
+			<% } %>
 			
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
