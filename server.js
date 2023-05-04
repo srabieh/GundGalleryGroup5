@@ -32,9 +32,9 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(
     fileUpload({
         limits: {
-            fileSize: 10000000,
+            fileSize: 1000000000,
         },
-        abortOnLimit: true,
+        abortOnLimit: false,
     })
 );
 
@@ -95,29 +95,30 @@ app.post('/scan', async (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
 
     const { image } = req.files;
-    const buff = Buffer.from(image, 'base64');
-
-    if (!image) { return res.status(400); }
-    if (/^image/.test(image.mimetype)) return res.sendStatus(400);
-
+    console.log(image);
+    const buff = Buffer.from(image.data, 'base64');
+    
+    if (!image && !/^image/.test(image.mimetype) ) { return res.send("Not an image."); }
+    
     // Parse the image using Jimp.read() method
     await Jimp.read(buff, function (err, image) {
+        console.log(image);
         if (err) {
             console.error(err);
         }
         // Creating an instance of qrcode-reader module
-        let qrcode = new qrCode();
+        let qrcode = new QrCode();
         qrcode.callback = function (err, value) {
             if (err) {
                 console.error(err);
             }
-            // Printing the decrypted value
-            print(value);
-            res.json(value);
+            console.log(value);
+            if(value == undefined) { res.redirect('/survey') } else { res.json(value) }
         };
         // Decoding the QR code
         qrcode.decode(image.bitmap);
     });
+    res.send("Failed.");
 })
 
 app.get('/survey', (req, res) => {

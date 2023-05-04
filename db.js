@@ -34,7 +34,6 @@ async function insertClient(client) {
 		conn = await pool.getConnection();
 		const sql = `INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)`;
 		const result = await conn.query(sql, [client.name, client.email, client.age, client.gender]);
-		console.log(`Added client ${name} to database`);
 	} catch (error) {
 		throw error;
 	} finally {
@@ -67,10 +66,8 @@ async function getClientRowByEmail(email) {
 	try {
 		const rows = await query(`SELECT * FROM clients WHERE email = ?`, [email]);
 		if (rows.length > 0) {
-			console.log("Client ID was Found: " + rows[0].id);
 			return {...rows[0]};
 		} else {
-			console.log(`No client with email ${email} found.`);
 			return null;
 		}
 	} catch (err) {
