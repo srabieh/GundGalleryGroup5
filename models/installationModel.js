@@ -13,6 +13,20 @@ class Installation {
 		this.info_short_desc;
 	}
 	
+//Create a painting model with all the information.  
+	static async createPainting(paintingData){
+		try{
+			let painting = await db.getPaintingRowById(paintingData)
+			if(painting){
+				return new Installation(painting);
+			}
+		} catch(error) {
+			console.error(error);
+			throw error;
+		}
+	};
+	
+	
 	static async finishConstructor(id) {
 		const results = await db.query("SELECT * FROM installations WHERE ID = '" + id + "'");
 		console.log("results:"+results);

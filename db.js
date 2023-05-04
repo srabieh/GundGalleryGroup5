@@ -79,9 +79,26 @@ async function getClientRowByEmail(email) {
 	}
 }
 
+async function getPaintingRowById(email) {
+	try {
+		const rows = await query(`SELECT * FROM installations WHERE id = ?`, [id]);
+		if (rows.length > 0) {
+			console.log("Client ID was Found: " + rows[0].id);
+			return {...rows[0]};
+		} else {
+			console.log(`No client with email ${email} found.`);
+			return null;
+		}
+	} catch (err) {
+		console.error(err);
+		throw err;
+	}
+}
+
 module.exports = {
 	query,
 	insertClient,
 	checkClient,
-	getClientRowByEmail
+	getClientRowByEmail,
+	getPaintingRowById
 };

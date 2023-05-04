@@ -1,11 +1,14 @@
 // routes/adminRoutes.js
 const express = require('express');
 const router = express.Router();
+const installationController = require('../controllers/installationController');
+
 
 // Add your admin route handlers here
 
 //gets
-router.get('/', )
+router.get('/', installationController.index);
+router.get('/createPainting', installationController.createPainting);
 
 //posts
 

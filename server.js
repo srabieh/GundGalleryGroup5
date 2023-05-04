@@ -49,6 +49,11 @@ app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
+
+app.get('/testPainting', (req,res) => {
+	res.render('testPainting')
+});
+
 // Serve index.ejs
 app.get('/', (req, res) => {
     res.render('index');
