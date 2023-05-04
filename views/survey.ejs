@@ -51,12 +51,11 @@
 		<% } else {%>
 		<% if(client.returning == true){%>
 			<div class="animated-text-container">
-				<h1> class="animated-text"> Welcome back to the Gallery, <%= client.name %> </h1>
+				<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
 				<form id="qr-reader-form" action="/scan" method="POST" enctype="multipart/form-data">
 					<input id="qr-reader" type="file" name="image" accept="image/*" capture="environment">
 				</form>
 			</div>
-
 		<%}%>
 		<% if(client.returning == false){%>
 			<div class="animated-text-container">
