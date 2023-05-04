@@ -1,83 +1,80 @@
-//SCMP 318 Wordcloud
+// SCMP 318 Wordcloud
 
-const sketch = (p) => {
-  let sourceText;
-  let response;
-  let img;
-  let startIndex = 0;
+let sourceText;
+let response;
+let img;
+let startIndex = 0;
 
-  p.preload = () => {
-    img = p.loadImage("/public/images/installation-1.png");
-    sourceText = p.loadStrings("/public/test.txt");
-  };
+function preload() {
+  img = loadImage("/public/images/installation-2.png");
+  sourceText = loadStrings("/public/test.txt");
+}
 
-  p.setup = () => {
-    p.createCanvas(800, 800);
-    response = sourceText.join(' ');
-    p.textFont("Courier-Bold");
+function setup() {
+  createCanvas(800, 800);
 
-    img.resize(60, 0);
-    img.loadPixels();
+  response = sourceText.join(' ');
+  textFont("Courier-Bold");
 
-    for (let x = 0; x < img.width; x++) {
-      for (let y = 0; y < img.height; y++) {
-        let index = (x + y * img.width) * 4;
+  img.resize(60, 0);
+  img.loadPixels();
 
-        let r = img.pixels[index];
-        let g = img.pixels[index + 1];
-        let b = img.pixels[index + 2];
-        let a = img.pixels[index + 3];
+  for (let x = 0; x < img.width; x++) {
+    for (let y = 0; y < img.height; y++) {
+      let index = (x + y * img.width) * 4;
 
-        if (r > 220 && g > 220 && b > 220 && a > 200) {
-          img.pixels[index] = 0;
-          img.pixels[index + 1] = 0;
-          img.pixels[index + 2] = 0;
-          img.pixels[index + 3] = a;
-        }
+      let r = img.pixels[index];
+      let g = img.pixels[index + 1];
+      let b = img.pixels[index + 2];
+      let a = img.pixels[index + 3];
+
+      if (r > 220 && g > 220 && b > 220 && a > 200) {
+        img.pixels[index] = 0;
+        img.pixels[index + 1] = 0;
+        img.pixels[index + 2] = 0;
+        img.pixels[index + 3] = a;
       }
     }
+  }
 
-    img.updatePixels();
-  };
+  img.updatePixels();
+}
 
-  p.draw = () => {
-    p.background(0);
-    p.frameRate(6);
+function draw() {
+  background(0);
+  frameRate(6);
 
-    let w = p.width / img.width;
-    let h = p.height / img.height;
-    img.loadPixels();
+  let w = width / img.width;
+  let h = height / img.height;
+  img.loadPixels();
 
-    let charIndex = startIndex;
-    for (let j = 0; j < img.height; j++) {
-      for (let i = 0; i < img.width; i++) {
-        const pixelIndex = (i + j * img.width) * 4;
-        const r = img.pixels[pixelIndex + 0];
-        const g = img.pixels[pixelIndex + 1];
-        const b = img.pixels[pixelIndex + 2];
-        const avg = (r + g + b) / 3;
+  let charIndex = startIndex;
+  for (let j = 0; j < img.height; j++) {
+    for (let i = 0; i < img.width; i++) {
+      const pixelIndex = (i + j * img.width) * 4;
+      const r = img.pixels[pixelIndex + 0];
+      const g = img.pixels[pixelIndex + 1];
+      const b = img.pixels[pixelIndex + 2];
+      const avg = (r + g + b) / 3;
 
-        p.noStroke();
-        p.fill(avg);
-        p.textSize(w * 1.2);
-        p.textAlign(p.CENTER, p.CENTER);
+      noStroke();
+      fill(avg);
+      textSize(w * 1.2);
+      textAlign(CENTER, CENTER);
 
-        p.text(response.charAt(charIndex % response.length), i * w + w * 0.5, j * h + h * 0.5);
-        charIndex++;
-      }
+      text(response.charAt(charIndex % response.length), i * w + w * 0.5, j * h + h * 0.5);
+      charIndex++;
     }
+  }
 
-    startIndex++;
-  };
+  startIndex++;
+}
 
-  p.keyPressed = () => {
-    if (p.background(0)) {
-      p.background(256);
-    } else {
-      p.background(0);
-    }
-  };
-};
-
-new p5(sketch);
+function keyPressed() {
+  if (background(0)) {
+    background(256);
+  } else {
+    background(0);
+  }
+}
 
