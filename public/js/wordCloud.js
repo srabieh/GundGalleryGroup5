@@ -7,8 +7,8 @@ const sketch = (p) => {
   let startIndex = 0;
 
   p.preload = () => {
-    img = p.loadImage("installation-1.png");
-    sourceText = p.loadStrings("db.txt");
+    img = p.loadImage("/public/images/installation-1.png");
+    sourceText = p.loadStrings("/public/test.txt");
   };
 
   p.setup = () => {
