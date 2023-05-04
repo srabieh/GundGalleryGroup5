@@ -44,6 +44,13 @@ app.get('/words', (req, res) => {
     res.render('wordCloud');
 });
 
+app.post('/scan', (req, res) => {
+    const { image } = req.files;
+
+    if (!image) { return res.status(400); }
+    
+})
+
 app.get('/survey', (req, res) => {
     if (req.cookies.access_token) {
         try {
