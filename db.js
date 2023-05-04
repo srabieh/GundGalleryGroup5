@@ -2,9 +2,9 @@
 const mariadb = require('mariadb');
 
 const pool = mariadb.createPool({
-	host: '3.22.149.75',
-	user: 'root',
-	password: 'newpassword',
+	host: process.env.HOST,
+	user: process.env.DB_USERNAME,
+	password: process.env.DB_PASSWORD,
 	database: 'gund',
 	connectionLimit: 5,
 	waitForConnections: true

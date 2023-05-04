@@ -51,25 +51,10 @@
 			<div class="animated-text-container">
 				<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %> </h1>
 			</div>
-			<h1>QR Code Scanner</h1>
-			<div id="qr-reader" style="width: 300px; height: 300px;"></div>
-			<p id="qr-status"></p>
-
-			<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-			<script>
-				const qrCodeScanner = new Html5Qrcode("qr-reader");
-				navigator.mediaDevices.getUserMedia({video: true})
-				
-				function onScanSuccess(qrMessage) {
-					window.location.href = qrMessage;
-				}
-
-				function onScanFailure(error) {
-					document.getElementById("qr-status").innerHTML = `Error: ${error}`;
-				}
-
-				qrCodeScanner.start({ facingMode: "environment" }, onScanSuccess, onScanFailure);
-			</script>
+		<h1>Camera Test</h1>
+		<video id="video" width="640" height="480" autoplay></video>
+		<button id="startButton">Start camera</button>
+		<input type="file" name="image" accept="image/*" capture="environment">
 		<% } %>
 
 		  <!-- Scripts and Things -->
