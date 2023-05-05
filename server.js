@@ -87,5 +87,5 @@ app.get('/survey', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+    console.log(`Server listening on port ${PORT}` + process.env.JWT_SECRET);
 });
