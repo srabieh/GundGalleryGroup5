@@ -5,6 +5,6 @@ exports.index = async (req, res) => {
 	return res.status(200);
 }
 
-exports.submit = {
+exports.thanks = async (req, res) => {
 	return res.redirect("/thanks");
 }
