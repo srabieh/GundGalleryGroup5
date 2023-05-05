@@ -80,7 +80,6 @@ app.get('/testPainting', (req, res) => {
 
 
 
-
 // Serve index.ejs
 app.get('/', (req, res) => {
     res.render('index');
