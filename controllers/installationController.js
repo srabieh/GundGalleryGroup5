@@ -15,7 +15,7 @@ exports.createPainting = async (req , res) => {
 			console.log("We have pulled that painting data like a boss.");
 			console.log(installation.info_short_desc);
 			const token = jwt.sign(JSON.stringify(installation), process.env.JWT_SECRET);
-			return res.cookie("access_token", token, {
+			return res.cookie("installation_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
             })
