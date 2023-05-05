@@ -14,11 +14,9 @@ exports.index = async (req, res) => {
 exports.createClient = async (req , res) => {
 	const { name , email , age , gender } = req.body;
 	try {		
-		let returning = false;
-		const client = await Client.createClient({name, email, age, gender, returning});
+		const client = await Client.newClient({ name, email, age, gender });
 
 		if(client instanceof Client){
-			console.log("Client successfully added, are they returning: " + client.returning)
 			const token = jwt.sign(JSON.stringify(client), process.env.JWT_SECRET);
 			return res.cookie("access_token", token, {
                 httpOnly: true,
@@ -27,8 +25,7 @@ exports.createClient = async (req , res) => {
             .redirect("/survey");
 		}
 	} catch(error){
-		console.log("Error in clientController createClient");
-		console.log(err);
+		console.log(error);
 		return res.redirect("/survey");
 	}
 }
@@ -37,10 +34,4 @@ exports.createClient = async (req , res) => {
 exports.logout = async (req, res) => {
     return res.clearCookie("access_token")
         .redirect("/");
-};
-
-
-//--- Client pushing a comment to the database ------------------
-exports.pushComment = async (req,res) => {
-	
 };

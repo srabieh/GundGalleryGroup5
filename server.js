@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require('express-fileupload');
 const Jimp = require("jimp");
 const fs = require('fs')
-const QrcodeDecoder = require('qrcode-decoder').default;
 
 const Client = require('./models/clientModel.js').Client;
 const Installation =  require('./models/installationModel.js').Installation;
@@ -49,36 +48,6 @@ app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
-
-app.get('/testPainting', (req, res) => {
-    if (req.cookies.access_token) {
-        try {
-            const installation = new Installation(jwt.verify(req.cookies.installation_token, process.env.JWT_SECRET));
-
-            return res.render("testPainting", { 
-                isInstallation: true, 
-                installation: installation, 
-                error: null
-            });
-        } catch(err) {
-            console.log(err);
-            return res.render("testPainting", { 
-                isInstallation: false, 
-                installation: null,
-                error: "Invalid token. Please login again."
-            });
-        }
-    }
-
-    return res.render("testPainting", { 
-        isInstallation: false, 
-        installation: null,
-        error: null
-    });
-});
-
-
-
 
 // Serve index.ejs
 app.get('/', (req, res) => {

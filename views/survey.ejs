@@ -29,7 +29,7 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<form action="/client/createClient" method="POST">
+							<form action="/client/newClient" method="POST">
 							<label for="name">Name:</label>
 							<input type="text" name="name" id="username" required>
 							<br>
@@ -49,12 +49,11 @@
 				</div>
 			</div>
 		<% } else {%>
-			<% if(client.returning == true){%>
+			<% if(client.last_submission_date == (new Date())) {%>
 				<div class="animated-text-container">
 					<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
 				</div>
-			<%}%>
-			<% if(client.returning == false){%>
+			<%} else {%>
 				<div class="animated-text-container">
 					<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %>. Enjoy your first visit</h1>
 				</div>
@@ -70,9 +69,9 @@
 				document.querySelector('.animated-text').classList.add('animate');
 			});
 
-			$("#qr-reader").on("change", ()=>{
+			$("#qr-reader").on("change", ()=> {
 				$("#qr-reader-form").submit();
-			})
+			});
 		</script>
     </body>
 </html>

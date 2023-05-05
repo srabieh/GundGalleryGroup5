@@ -3,43 +3,35 @@ let db = require('../db');
 
 //Define the Class--------------------------------
 class Client {
-	constructor({ id, name, email, age, gender, returning}) {
+	constructor({ id, name, email, age, gender, last_submission_date='null'}) {
 		this.id = id;
 		this.name = name; 
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
-		this.returning = returning;
+		this.last_submission_date = last_submission_date;
 	}
 	
-	//Function will return true or false as to whether a client already exists:
-	static async isClient(name, email) {
-		const results = await db.query('SELECT * FROM clients WHERE name = ? AND email = ?', [name, email]);
-		return results == [];
-	}
-	
-	//Function to create a new client when someone comes on to take the survey.
-	static async createClient(clientData) {
+	// Function to create a new client when someone comes on to take the survey.
+	static async newClient(clientData) {
 		try {
-			let client = await db.getClientRowByEmail(clientData.email);
+			let client = await Client.getClientRowByEmail(clientData.email);
 
 			if(client) { 
 				console.log("Client already exists in database");
 				console.log(client);
-				client.returning = true;
-				return new Client(client); 
+				// ---- check if submission date is diff from today --------------------------------------
+				return client; 
 			}
 			
-			const sql = 'INSERT INTO clients (name, email, age, gender) VALUES (?, ?, ?, ?)';
-			const params = [clientData.name, clientData.email, clientData.age, clientData.gender];
+			const sql = 'INSERT INTO clients (name, email, age, gender, last_submission_date) VALUES (?, ?, ?, ?, ?)';
+			const params = [clientData.name, clientData.email, clientData.age, clientData.gender, (new Date().now())];
 			
 			try {
 				const insert = await db.query(sql, params);
-				const client = await db.getClientRowByEmail(clientData.email);
-				client.returning = false;
+				const client = await Client.getClientRowByEmail(clientData.email);
 				console.log(clientData.name + " has been added to the database");
-				
-				return new Client(client);
+				return client;
 			} catch (err) {
 				console.error(err);
 				throw err;
@@ -49,9 +41,20 @@ class Client {
 			throw error;
 		}
 	}
-	
-	//Function for a client to push a comment to the database.
-	async pushComment(comment) { }
+
+	static async getClientRowByEmail(email) {
+		try {
+			const rows = await db.query(`SELECT * FROM clients WHERE email = ?`, [email]);
+			if (rows.length > 0) {
+				return new Client({...rows[0]});
+			} else {
+				return null;
+			}
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
+	}	
 }
 
 exports.Client = Client;

@@ -13,12 +13,10 @@ class Installation {
 		this.info_short_desc = info_short_desc;
 	}
 	
-//Create a painting model with all the information.  
-	static async createPainting(id){
+	// ----  Create a painting model with all the information. -------------------------------
+	static async getInstallation(id){
 		try{
-			console.log("createPainting is Running in Model, ID = " + id);
-			let painting = await db.getPaintingRowById(id);
-			console.log(painting);
+			let painting = await Installation.getById(id);
 			if(painting){
 				return new Installation(painting);
 			}
@@ -26,20 +24,23 @@ class Installation {
 			console.error(error);
 			throw error;
 		}
-	};
-	
-	
-	static async finishConstructor(id) {
-		const results = await db.query("SELECT * FROM installations WHERE ID = '" + id + "'");
-		console.log("results:"+results);
-		this.work_name = results[1];
-		this.artist = results[2];
-		this.material_medium = results[3];
-		this.date = results[4];
-		this.info_short_desc = results[5];
-		return results;
-	}
+	};	
 
+	static async getById(id) {
+		try {
+			const rows = await db.query(`SELECT * FROM installations WHERE id = ?`, [id]);
+			if (rows.length > 0) {
+				console.log("Client ID was Found: " + rows[0].id);
+				return new Installation({...rows[0]});
+			} else {
+				console.log(`No installation ${id} found.`);
+				return null;
+			}
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
+	}
 }
 
 exports.Installation = Installation;
