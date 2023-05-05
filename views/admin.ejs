@@ -27,18 +27,19 @@
             <form action="/admin/logout" method="POST">
                 <button type="submit">Logout</button>
             </form>
-        <% } %>
-        <script>
-            let wordList = $(".wordList");
-            fetch("http://3.22.149.75:5000/admin/getAllWords")
-                .then((res) => {
-                    return res.json();
-                })
-                .then((words) => {
-                    words.forEach((word) => {
-                        wordList.append("<li>"+JSON.stringify(word)+"</li>");
+        
+            <script>
+                let wordList = $(".wordList");
+                fetch("https://3.22.149.75/admin/getAllWords")
+                    .then((res) => {
+                        return res.json();
+                    })
+                    .then((words) => {
+                        words.forEach((word) => {
+                            wordList.append("<li>"+JSON.stringify(word)+"</li>");
+                        });
                     });
-                });
-        </script>
+            </script>
+        <% } %>
     </body>
 </html>

@@ -54,10 +54,6 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/words', (req, res) => {
-    res.render('wordCloud');
-});
-
 app.get('/survey', (req, res) => {
     if (req.cookies.access_token) {
         try {

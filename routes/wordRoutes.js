@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express.Router();
 
-// Add your admin route handlers here
+router.get("/words", (req, res) => {
+    res.render('words');
+})
 
 module.exports = router;
