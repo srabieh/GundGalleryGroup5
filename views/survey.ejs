@@ -49,24 +49,20 @@
 				</div>
 			</div>
 		<% } else {%>
-		<% if(client.returning == true){%>
-			<div class="animated-text-container">
-				<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
-				<form id="qr-reader-form" action="/scan" method="POST" enctype="multipart/form-data">
-					<input id="qr-reader" type="file" name="image" accept="image/*" capture="environment">
-				</form>
-			</div>
-		<%}%>
-		<% if(client.returning == false){%>
-			<div class="animated-text-container">
-				<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %> </h1>
-			</div>
-		<%}%>
-		
+			<% if(client.returning == true){%>
+				<div class="animated-text-container">
+					<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
+				</div>
+			<%}%>
+			<% if(client.returning == false){%>
+				<div class="animated-text-container">
+					<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %>. Enjoy your first visit</h1>
+				</div>
+			<%}%>
 		<% } %>
 
 		  <!-- Scripts and Things -->
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 		<script>

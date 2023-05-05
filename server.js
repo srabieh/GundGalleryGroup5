@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const jwt = require("jsonwebtoken");
@@ -6,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const fileUpload = require('express-fileupload');
 const Jimp = require("jimp");
 const fs = require('fs')
-const QrCode = require('qrcode-reader');
+const QrcodeDecoder = require('qrcode-decoder').default;
 
 const Client = require('./models/clientModel.js').Client;
 const Installation =  require('./models/installationModel.js').Installation;
@@ -34,7 +35,6 @@ app.use(
         limits: {
             fileSize: 1000000000,
         },
-        abortOnLimit: false,
     })
 );
 
@@ -50,11 +50,10 @@ app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
-
 app.get('/testPainting', (req, res) => {
     if (req.cookies.access_token) {
         try {
-            const installation = new Installation(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+            const installation = new Installation(jwt.verify(req.cookies.installation_token, process.env.JWT_SECRET));
 
             return res.render("testPainting", { 
                 isInstallation: true, 
@@ -90,36 +89,6 @@ app.get('/', (req, res) => {
 app.get('/words', (req, res) => {
     res.render('wordCloud');
 });
-
-app.post('/scan', async (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-
-    const { image } = req.files;
-    console.log(image);
-    const buff = Buffer.from(image.data, 'base64');
-    
-    if (!image && !/^image/.test(image.mimetype) ) { return res.send("Not an image."); }
-    
-    // Parse the image using Jimp.read() method
-    await Jimp.read(buff, function (err, image) {
-        console.log(image);
-        if (err) {
-            console.error(err);
-        }
-        // Creating an instance of qrcode-reader module
-        let qrcode = new QrCode();
-        qrcode.callback = function (err, value) {
-            if (err) {
-                console.error(err);
-            }
-            console.log(value);
-            if(value == undefined) { res.redirect('/survey') } else { res.json(value) }
-        };
-        // Decoding the QR code
-        qrcode.decode(image.bitmap);
-    });
-    res.send("Failed.");
-})
 
 app.get('/survey', (req, res) => {
     if (req.cookies.access_token) {

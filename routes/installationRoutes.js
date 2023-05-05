@@ -10,7 +10,4 @@ const installationController = require('../controllers/installationController');
 router.get('/', installationController.index);
 router.post('/createPainting', installationController.createPainting);
 
-//posts
-
-
 module.exports = router;
