@@ -59,7 +59,6 @@ app.get('/wordCloud', async (req, res) => {
     res.render('words');
 });
 
-
 app.get('/survey', async (req, res) => {
     if (req.cookies.access_token) {
         try {
