@@ -54,11 +54,10 @@ app.get('/', async (req, res) => {
     res.render('index');
 });
 
-// wordcloud
-app.get('/wordCloud', (req, res) => {
+// Seve wordcloud
+app.get('/wordCloud', async (req, res) => {
     res.render('words');
 });
-
 
 app.get('/survey', async (req, res) => {
     if (req.cookies.access_token) {
