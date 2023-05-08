@@ -45,6 +45,24 @@ class Installation {
 			throw err;
 		}
 	}
+	
+	
+	//Push words into database.
+	static async pushWords(clientID, installationID , wordOne, wordTwo, wordThree){
+		const wordsSmashed = wordOne + " " + wordTwo + " " + wordThree;
+		console.log(wordsSmashed);
+		const sql = 'INSERT INTO wordcloud (client_id, installation_id, words) VALUES (?, ?, ?)';
+		const params = [clientID, installationID, wordsSmashed];
+		try{
+			const insert = await db.query(sql , params);
+		} catch (err){
+			console.error(err);
+			throw err;
+		}
+
+	}
+
 }
+
 
 exports.Installation = Installation;
