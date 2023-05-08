@@ -4,10 +4,19 @@ let sourceText;
 let response;
 let img;
 let startIndex = 0;
+const url = getCurrentURL()
+let lastChar = url.charAt(url.length - 1);
+console.log(url);
+console.log(lastChar)
+
 
 function preload() {
-  img = loadImage("/public/images/installation-2.png");
+  img = loadImage("/public/images/installation-"+lastChar+".png");
   sourceText = loadStrings("/public/test.txt");
+}
+
+function getCurrentURL () {
+  return window.location.href
 }
 
 function setup() {
