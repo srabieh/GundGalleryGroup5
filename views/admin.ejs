@@ -23,7 +23,7 @@
         <% } else { %>
             <p>Hi, <%= admin.username %> </p>
             <h2>Create Installation</h2>
-            <form action="/installation/" method="POST">
+            <form action="/installation/" method="POST" enctype="multipart/form-data">
                 <label for="work_name">Work Name</label>
                 <input type="text" name="work_name" id="work_name" required>
                 <br>
@@ -55,10 +55,7 @@
                 <input type="hidden" name="_method" value="DELETE">
                 <button type="submit">Delete Installation</button>
             </form>
-
-            <form action="/admin/logout" method="POST">
-                <button type="submit">Logout</button>
-            </form>
+            <br> <br>
             <form action="/admin/logout" method="POST">
                 <button type="submit">Logout</button>
             </form>

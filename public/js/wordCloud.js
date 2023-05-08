@@ -5,11 +5,10 @@ const sketch = (p) => {
   let startIndex = 0;
   const url = getCurrentURL();
   const lastChar = url.split('/').pop()
-  const installationID = lastChar;
- 
-  p.preload = async () => {
-    img = p.loadImage("/public/images/installation-" + lastChar + ".png");
-    sourceText = await fetchResponses();
+
+  p.preload = () => {
+    img = p.loadImage("/public/images/" + INSTALL_IMAGE);
+    sourceText = COMMENTS;
   };
 
   function getCurrentURL() {
@@ -37,9 +36,7 @@ async function completeFetch(data){
   p.setup = async () => {
 
     p.createCanvas(400, 400);
-    response = sourceText;
     p.textFont("Courier-Bold");
-	
 
     img.resize(60, 0);
     img.loadPixels();
@@ -87,7 +84,7 @@ async function completeFetch(data){
         p.textSize(w * 1.2);
         p.textAlign(p.CENTER, p.CENTER);
 
-        p.text(response.charAt(charIndex % response.length), i * w + w * 0.5, j * h + h * 0.5);
+        p.text(sourceText.charAt(charIndex % sourceText.length), i * w + w * 0.5, j * h + h * 0.5);
         charIndex++;
       }
     }

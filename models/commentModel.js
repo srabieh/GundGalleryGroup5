@@ -26,9 +26,8 @@ class Comment {
 		return true;
 	}
 
-	static async getAllByInstallation(id) { 
+	static async getAllByInstallation({ id }) { 
 		const sql = 'SELECT comments.id, clients.name, comments.response_text FROM comments JOIN clients ON comments.client_id = clients.id WHERE comments.installation_id = ?';
-
 		try {
 			const rows = await db.query(sql, [id]);
 			if (rows.length > 0) {
