@@ -1,7 +1,7 @@
 // models/clientModel.js
 let db = require('../db');
 
-//Define the Class--------------------------------
+// ---------------------------- Define the Class --------------------------------
 class Client {
 	constructor({ id, name, email, age, gender, last_submission_date='null'}) {
 		this.id = id;

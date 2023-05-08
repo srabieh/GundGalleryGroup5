@@ -45,7 +45,7 @@ class Comment {
 			return false;
 		}
 		return [];
-	};	
+	}
 }
 
 exports.Comment = Comment;
