@@ -22,6 +22,6 @@ exports.get = async (req, res) => {
             return res.redirect("/");
         }
     }
-    res.redirect("/survey");
+    res.redirect("/");
 }
 

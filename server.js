@@ -39,18 +39,8 @@ app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
 app.use('/comment', commentRoutes);
 
-// Serve index.ejs
+// Serving survey
 app.get('/', async (req, res) => {
-    res.render('index');
-});
-
-// Serve wordcloud.ejs
-app.get('/wordCloud', async (req, res) => {
-    res.render('words');
-});
-
-// Serve survey
-app.get('/survey', async (req, res) => {
     if (req.cookies.access_token) 
     {
         try {
@@ -71,6 +61,11 @@ app.get('/survey', async (req, res) => {
         isClient: false, 
         client: null
     });
+});
+
+// Serve wordcloud.ejs
+app.get('/wordCloud', async (req, res) => {
+    res.render('words');
 });
 
 // Start server

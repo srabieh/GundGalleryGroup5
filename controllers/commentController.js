@@ -22,7 +22,7 @@ exports.create = async (req , res) => {
             return res.redirect(req.get('referer'));
         } catch(error){
             console.log(error);
-            return res.redirect("/survey");
+            return res.redirect("/");
         }
     }
 }

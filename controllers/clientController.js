@@ -11,10 +11,10 @@ exports.join = async (req , res) => {
                 httpOnly: true,
 				maxAge: 1.08e7,
                 secure: process.env.NODE_ENV === "production",
-            }).redirect("/survey");
+            }).redirect("/");
 		}
 	} catch(error){
 		console.log(error);
-		return res.redirect("/survey");
+		return res.redirect("/");
 	}
 }

@@ -14,6 +14,7 @@ class Comment {
 	async insert() {
 		const INSERT = 'INSERT INTO comments (client_id, installation_id, response_text) VALUES (?, ?, ?)';
 		const SELECT = 'SELECT * FROM comments WHERE client_id = ? AND installation_id = ? AND response_text = ?';
+		if(this.response_text.length==0) { return false; }
 		try {
 			const exists = await db.query(SELECT, [this.client_id, this.installation_id, this.response_text])
 			if (exists.length != 0) { return false; }
