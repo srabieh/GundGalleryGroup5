@@ -16,7 +16,7 @@ exports.get = async (req, res) => {
             const client = await Client.getByEmail(token_data.email);
 
             if(installation instanceof Installation && client instanceof Client) {
-                return res.render("installation", { installation: installation });
+                return res.render("installation", { installation: installation, client: client });
             }
             
         } catch(error){
