@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const installationController = require('../controllers/installationController');
 
-// get installation of id
-router.get('/:id', installationController.index);
+router.get('/', installationController.index)
+router.get('/:id', installationController.get);
 
 module.exports = router;

@@ -4,10 +4,9 @@ const path = require('path');
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 const cookieParser = require("cookie-parser");
-const fileUpload = require('express-fileupload');
-const Jimp = require("jimp");
 const fs = require('fs')
 
+const Admin = require('./models/adminModel.js').Admin;
 const Client = require('./models/clientModel.js').Client;
 const Installation =  require('./models/installationModel.js').Installation;
 
@@ -28,15 +27,6 @@ app.use(cookieParser());
 // Serve static files
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
-// File-upload
-app.use(
-    fileUpload({
-        limits: {
-            fileSize: 1000000000,
-        },
-    })
-);
-
 // Routes
 const adminRoutes = require('./routes/adminRoutes');
 const clientRoutes = require('./routes/clientRoutes');
@@ -47,7 +37,7 @@ const wordRoutes = require('./routes/wordRoutes');
 app.use('/admin', adminRoutes);
 app.use('/client', clientRoutes);
 app.use('/installation', installationRoutes);
-app.use('/word', wordRoutes);
+app.use('/comment', commentRoutes);
 
 // Serve index.ejs
 app.get('/', async (req, res) => {

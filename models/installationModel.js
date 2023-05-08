@@ -12,20 +12,6 @@ class Installation {
 		this.date = date;
 		this.info_short_desc = info_short_desc;
 	}
-	
-	// ----  Create a painting model with all the information. -------------------------------
-	static async getInstallation(id){
-		try{
-			let painting = await Installation.getById(id);
-			if(painting){
-				return new Installation(painting);
-			}
-		} catch(error) {
-			console.error(error);
-			throw error;
-		}
-		return false;
-	};	
 
 	static async getById(id) {
 		try {
