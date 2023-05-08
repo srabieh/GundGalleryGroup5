@@ -19,6 +19,7 @@ exports.create = async (req , res) => {
 			const token = jwt.sign(JSON.stringify(client), process.env.JWT_SECRET);
 			return res.cookie("access_token", token, {
                 httpOnly: true,
+				maxAge: 1.08e7,
                 secure: process.env.NODE_ENV === "production",
             })
             .redirect("/survey");
