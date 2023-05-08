@@ -15,9 +15,7 @@ class Client {
 	// Function to create a new client when someone comes on to take the survey.
 	static async join(clientData) {
 		try {
-			const client = await Client.getByEmail(clientData.email);
-
-			if(client) { 
+			if(Client.getByEmail(clientData.email)) { 
 				return client; 
 			}
 			

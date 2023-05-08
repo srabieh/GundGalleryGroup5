@@ -10,7 +10,7 @@ exports.create = async (req , res) => {
             const { response_text } = req.body;
 
             const token_data = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
-            const client = await Client.getByEmail(token_data.email);
+            const client = await Client.getById(token_data.id);
 
             const comment = new Comment({
                 client_id: client.id,

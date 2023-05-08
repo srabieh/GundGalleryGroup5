@@ -10,7 +10,7 @@ exports.get = async (req, res) => {
         try {
             const token_data = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
             
-            const client = await Client.getByEmail(token_data.email);
+            const client = await Client.getById(token_data.id);
             const installation = await Installation.getById(id);
             const comments = await Comment.getAllByInstallation(installation.id);
 
