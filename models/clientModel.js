@@ -15,6 +15,7 @@ class Client {
 	// Function to create a new client when someone comes on to take the survey.
 	static async join(clientData) {
 		try {
+			console.log(clientData);
 			const client = await Client.getByEmail(clientData.email);
 
 			if(client) { 
@@ -50,11 +51,12 @@ class Client {
 			}
 		} catch (err) {
 			console.error(err);
-			throw err;
+			return false;
 		}
 	}
 
 	static async getByEmail(email) {
+		console.log(email);
 		try {
 			const rows = await db.query(`SELECT * FROM clients WHERE email = ?`, [email]);
 			if (rows.length > 0) {
@@ -64,7 +66,7 @@ class Client {
 			}
 		} catch (err) {
 			console.error(err);
-			throw err;
+			return false;
 		}
 	}	
 }
