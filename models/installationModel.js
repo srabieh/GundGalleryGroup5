@@ -12,6 +12,25 @@ class Installation {
 		this.info_short_desc = info_short_desc;
 	}
 
+	static async getAll() {
+		try {
+			const rows = await db.query(`SELECT * FROM installations`, []);
+			if (rows.length !== 0) {
+				const installations = [];
+				rows.forEach(row => {
+					installations.push(new Installation(row));
+				});
+				return installations;
+			} else {
+				console.log(`No installations found.`);
+				return null;
+			}
+		} catch (err) {
+			console.error(err);
+			throw err;
+		}
+	}
+
 	static async getById(id) {
 		try {
 			const rows = await db.query(`SELECT * FROM installations WHERE id = ?`, [id]);

@@ -46,8 +46,10 @@ app.get('/', async (req, res) => {
         try {
             const token_data = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
             const client = await Client.getByEmail(token_data.email);
+            const installations = await Installation.getAll();
             return res.render('survey', { 
-                isClient: client instanceof Client, 
+                isClient: client instanceof Client,
+                installations: installations, 
                 client: client
             });
         } catch(err) {

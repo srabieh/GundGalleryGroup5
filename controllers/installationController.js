@@ -24,4 +24,3 @@ exports.get = async (req, res) => {
     }
     res.redirect("/");
 }
-
