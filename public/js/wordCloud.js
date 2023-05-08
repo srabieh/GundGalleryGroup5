@@ -7,9 +7,9 @@ const sketch = (p) => {
   const lastChar = url.split('/').pop()
   const installationID = lastChar;
  
-  p.preload = () => {
+  p.preload = async () => {
     img = p.loadImage("/public/images/installation-" + lastChar + ".png");
-    sourceText = "meow";
+    sourceText = await fetchResponses();
   };
 
   function getCurrentURL() {
@@ -35,12 +35,9 @@ async function completeFetch(data){
 }
 
   p.setup = async () => {
-	//Get the data from the users
-	let hold = await fetchResponses();
-	console.log(hold);
 
     p.createCanvas(400, 400);
-    response = hold;
+    response = sourceText;
     p.textFont("Courier-Bold");
 	
 
