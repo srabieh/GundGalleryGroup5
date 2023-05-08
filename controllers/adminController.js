@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 exports.index = async (req, res) => {
     if (req.cookies.admin_token) {
         try {
-            const token_data = jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET);
+            const admin = jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET);
 
             return res.render("admin", { 
                 isAdmin: true, 
