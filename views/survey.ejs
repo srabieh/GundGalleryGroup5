@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="container h-100">
+  <div class="container">
     <% if (!isClient) { %>
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-6 p-5 menu m-2">
@@ -41,25 +41,24 @@
           </form>
         </div>
       </div>
-    </div>
-    <% } else {%>
-    <% if(client.last_submission_date.toISOString().substring(0, 10) != (new Date().toISOString().substring(0, 10))) {%>
-	
-    <div class="text-center mt-5">
-      <h1>Welcome back to the Gallery, <%= client.name %></h1>
-    </div>
-    <%} else {%>
-    <div class="text-center mt-5">
-      <h1>Welcome to Gund Gallery, <%= client.name %>. Enjoy your first visit!</h1>
-    </div>
-    <% } %>
+    <% } else { %>
+      <% let lastDate = (new Date(client.last_submission_date)).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10); %>
+      <% if(lastDate != (new Date()).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10)) {%>
+        <div class="text-center mt-5 p-4 header">
+          <h1>Welcome back to Gund Gallery, <span style="color:#588157;"><%= client.name %></span></h1>
+        </div>
+      <%} else {%>
+        <div class="text-center p-4 mt-5 header">
+          <h1>Welcome to Gund Gallery, <span style="color:#588157;"><%= client.name %></span>!</h1>
+        </div>
+      <% } %>
 
       <!-- Container Two (With Cards) -->
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-5">
         <% installations.forEach((install) => { %>
           <a href="/installation/<%= install.id %>" class="col">
               <div class="card h-100">
-              <img src="/public/images/installation-<%= install.id %>.png" class="card-img-top" alt="...">
+                <img src="/public/images/installation-<%= install.id %>.png" class="card-img-top" alt="...">
               </div>
           </a>
         <% }); %>

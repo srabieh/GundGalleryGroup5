@@ -73,14 +73,6 @@ const sketch = (p) => {
 
     startIndex++;
   };
-
-  p.keyPressed = () => {
-    if (p.background(0)) {
-      p.background(256);
-    } else {
-      p.background(0);
-    }
-  };
 };
 
 const myp5 = new p5(sketch, "sketch");

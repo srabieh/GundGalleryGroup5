@@ -2,49 +2,10 @@
 
 /* set the background of the page to be gund gallery */
 body {
-  background-image: url('/public/images/galleryOutside.jpg');
+  background-color: #F4F3EE;
   background-size: cover;
-  color: white;
-}
-
-
-/* Hyptohetically this makes it stay centered on the phone, I don't think it actually  does anything. */
-@media only screen and (max-width: 768px) and (orientation: portrait) {
-  .animated-text {
-    font-size: 48px;
-    margin-top: 100px;
-  }
-}
-
-/* Things for the animated text */
-.animated-text-container {
-  display: flex;
-  justify-content: center; /* center horizontally */
-  align-items: center; /* center vertically */
-}
-
-.animated-text {
-  position: fixed;
-  margin-top: 200px;
-  transform: translateX(-50%);
-  opacity: 0;
-  font-size: 3rem;
-  color: white;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
-
-.animated-text {
-  animation: fade-up 1s ease-out forwards;
+  color: #242331;
+  max-height:100vh;
 }
 
 .card {
@@ -65,18 +26,13 @@ body {
   object-fit: cover;
 }
 
-body {
-  height:100vh;
-}
-
 .menu {
-  background-color: white; 
+  background-color: #242331; 
   color: black;
 }
 
-.header
-{
-  color: black;
-  background-color: white;
+.header{
+  color: #242331;
+  background-color: #F4F3EE;
   border-radius: 4px;
 }
