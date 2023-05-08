@@ -14,8 +14,7 @@ class Admin {
             const result = await db.query('SELECT * FROM admins WHERE username = ?', [username]);
     
             if (result[0] && result[0].password === password) { // For simplicity, we're using plain-text password comparison. Use a proper hashing method in a real-world application.
-                let admin = new Admin(result[0]);
-                return admin;
+                return new Admin(result[0]);
             } else if (result[0]) {
                 return 'Incorrect password';
             } else {
