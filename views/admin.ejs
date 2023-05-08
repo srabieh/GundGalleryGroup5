@@ -22,7 +22,43 @@
             </form>
         <% } else { %>
             <p>Hi, <%= admin.username %> </p>
+            <h2>Create Installation</h2>
+            <form action="/installation/" method="POST">
+                <label for="work_name">Work Name</label>
+                <input type="text" name="work_name" id="work_name" required>
+                <br>
+                <label for="artist">Artist</label>
+                <input type="text" name="artist" id="artist" required>
+                <br>
+                <label for="material_medium">Material/Medium</label>
+                <input type="text" name="material_medium" id="material_medium" required>
+                <br>
+                <label for="date">Date</label>
+                <input type="date" name="date" id="date" required>
+                <br>
+                <label for="info_short_desc">Short Description</label>
+                <input type="text" name="info_short_desc" id="info_short_desc" required>
+                <br>
+                <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                    <input type="file" class="form-control" name="image">
+                </div>
+                <button type="submit">Create Installation</button>
+            </form>
 
+            <!-- Delete Installation Form -->
+            <h2>Delete Installation</h2>
+            <form action="/installation/delete" method="POST">
+                <label for="id">Installation ID:</label>
+                <input type="number" name="id" id="id" required>
+                <br>
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete Installation</button>
+            </form>
+
+            <form action="/admin/logout" method="POST">
+                <button type="submit">Logout</button>
+            </form>
             <form action="/admin/logout" method="POST">
                 <button type="submit">Logout</button>
             </form>
