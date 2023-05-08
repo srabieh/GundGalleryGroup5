@@ -4,9 +4,7 @@ const sketch = (p) => {
   let img;
   let startIndex = 0;
   const url = getCurrentURL();
-  let lastChar = url.charAt(url.length - 1);
-  console.log(url);
-  console.log(lastChar);
+  const lastChar = url.split('/').pop()
 
   p.preload = () => {
     img = p.loadImage("/public/images/installation-" + lastChar + ".png");
