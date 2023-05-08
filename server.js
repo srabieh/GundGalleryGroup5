@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 const router = express.Router();
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 const fs = require('fs')
 
 const Admin = require('./models/adminModel.js').Admin;
@@ -31,7 +31,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 const adminRoutes = require('./routes/adminRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const installationRoutes = require('./routes/installationRoutes');
-const wordRoutes = require('./routes/wordRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 // Routes
 app.use('/admin', adminRoutes);
@@ -44,27 +44,30 @@ app.get('/', async (req, res) => {
     res.render('index');
 });
 
-// Seve wordcloud
+// Serve wordcloud.ejs
 app.get('/wordCloud', async (req, res) => {
     res.render('words');
 });
 
+// Serve survey
 app.get('/survey', async (req, res) => {
-    if (req.cookies.access_token) {
+    if (req.cookies.access_token) 
+    {
         try {
             const token_data = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
             const client = await Client.getByEmail(token_data.email);
-
-            return res.render("survey", { 
+            return res.render('survey', { 
                 isClient: client instanceof Client, 
                 client: client
             });
         } catch(err) {
             console.log(err);
+            res.render('error', {
+                error: err
+            });
         }
     }
-
-    return res.render("survey", { 
+    return res.render('survey', { 
         isClient: false, 
         client: null
     });
@@ -72,5 +75,5 @@ app.get('/survey', async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}` + process.env.JWT_SECRET);
+    console.log(`Server listening on port ${PORT} using JWT Secret: ` + process.env.JWT_SECRET);
 });
