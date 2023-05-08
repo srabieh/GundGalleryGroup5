@@ -61,8 +61,24 @@ class Installation {
 		}
 
 	}
+	
+	//Get words from the database.
+	static async getResponses(installationID){
+		try{
+			const rows = await db.query(`SELECT * FROM wordcloud WHERE installation_id IN (?)`, [installationID]);
+			if(rows){
+				console.log(rows);
+				return rows;
+			}
+		} catch (err){
+			console.error(err);
+			throw err;
+		}
+	}
 
 }
+
+
 
 
 exports.Installation = Installation;

@@ -5,20 +5,44 @@ const sketch = (p) => {
   let startIndex = 0;
   const url = getCurrentURL();
   const lastChar = url.split('/').pop()
-
+  const installationID = lastChar;
+ 
   p.preload = () => {
     img = p.loadImage("/public/images/installation-" + lastChar + ".png");
-    sourceText = p.loadStrings("/public/test.txt");
+    sourceText = "meow";
   };
 
   function getCurrentURL() {
     return window.location.href;
-  }
+  };
 
-  p.setup = () => {
+async function fetchResponses() {
+  console.log("fetchResponses is running");
+  const response = await fetch("/installation/"+installationID+"/getResponses", {
+    method: "get"
+  });
+  const data = await response.json();
+  console.log(data);
+  let words =  completeFetch(data);
+  return words;
+};
+
+
+async function completeFetch(data){
+	words = data['words'];	
+	console.log(words);
+	return words;
+}
+
+  p.setup = async () => {
+	//Get the data from the users
+	let hold = await fetchResponses();
+	console.log(hold);
+
     p.createCanvas(400, 400);
-    response = sourceText.join(' ');
+    response = hold;
     p.textFont("Courier-Bold");
+	
 
     img.resize(60, 0);
     img.loadPixels();
@@ -76,3 +100,4 @@ const sketch = (p) => {
 };
 
 const myp5 = new p5(sketch, "sketch");
+

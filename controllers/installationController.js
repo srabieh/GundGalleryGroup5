@@ -45,3 +45,23 @@ exports.pushWords = async (req, res) => {
 	} 
 
 }
+
+//Pull the responses from the database.
+exports.getResponses = async (req, res) => {
+	//Get the page that they came from
+	const { id } = req.params;
+	console.log("getResponses is running for installation: " + id);
+	try{
+		const responses = await Installation.getResponses(id);
+		if(responses){
+			const words = responses.map(obj => obj.words).join(' ');
+			console.log(words);
+			const JSON = { words: words };
+			res.json(JSON);
+		}
+	}	catch(error){
+			console.log(error);
+            return res.redirect(url);
+		}
+	
+}
