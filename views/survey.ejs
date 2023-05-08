@@ -50,13 +50,105 @@
 			</div>
 		<% } else {%>
 			<% if(client.last_submission_date == (new Date())) {%>
-				<div class="animated-text-container">
-					<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
+			<!-- Container One -->
+			<div class = "container-fluid">
+				<div class = "row">
+					<div class="animated-text-container">
+						<h1 class="animated-text">  Welcome back to the Gallery, <%= client.name %> </h1>
+					</div>
 				</div>
+			</div>
+
+
+			
 			<%} else {%>
-				<div class="animated-text-container">
-					<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %>. Enjoy your first visit</h1>
+			<!-- Container One -->
+			<div class = "container-fluid">
+				<div class = "row">
+					<div class="animated-text-container">
+						<h1 class = "animated-text"> Welcome to the Gallery, <%= client.name %>. Enjoy your first visit</h1>
+					</div>
 				</div>
+			</div>
+			
+			<!-- Container Two (With Cards) -->
+			<% let filler = "interesting description" %>
+			<div class="container mx-auto">
+			  <div class="row row-cols-5 g-4">
+				<a href = "/installation/1">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-1.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "/installation/2">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-2.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/3">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-3.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/4">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-4.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/5">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-5.png" class="card-img-top" alt="...">
+						<div class="card-body">
+						</div>
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/6">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-6.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/7">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-7.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/8">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-8.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/9">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-9.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+				<a href = "installation/10">
+					<div class="col">
+					  <div class="card h-100">
+						<img src="/public/images/installation-10.png" class="card-img-top" alt="...">
+					  </div>
+					</div>
+				</a>
+			  </div>
+			 </div>
 			<%}%>
 		<% } %>
 
