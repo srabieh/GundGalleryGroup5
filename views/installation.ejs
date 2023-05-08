@@ -25,6 +25,12 @@
 				<p class="text-left"> <b> Artist: </b> <%= installation.artist %></p>
 				<p class="text-left"> <b> Material: </b> <%= installation.material_medium %></p>
 				<p class="text-left"> <b> Info: </b> <%= installation.info_short_desc %></p>
+							    <!-- Modal Button -->
+			<div class="text-center mt-5">
+			  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#surveyModal" style="background-color: black">
+				Share Thoughts
+			  </button>
+			</div>
 			</div>
 			<div class="col-12 col-md-4 mt-5" id="sketch">
 			</div>
@@ -62,6 +68,35 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content text-center">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="surveyModalLabel">Describe the installation in three words</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				  </div>
+				  <div class="modal-body">
+					<form action="/client/join" method="POST">
+					  <div class="mb-3">
+						<label for="text" class="form-label">word one:</label>
+						<input type="text" name="wordOne" id="wordOne" class="form-control" required>
+					  </div>
+					  <div class="mb-3">
+						<label for="text" class="form-label">word two:</label>
+						<input type="text" name="wordTwo" id="wordTwo" class="form-control" required>
+					  </div>
+					  <div class="mb-3">
+						<label for="text" class="form-label">word three:</label>
+						<input type="text" name="wordTwo" id="wordTwo" class="form-control" required>
+					  </div>
+					  <button type="submit" class="btn btn-primary">Submit</button>
+					</form>
+				  </div>
+				</div>
+			  </div>
+			</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
