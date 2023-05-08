@@ -9,7 +9,7 @@ class Admin {
     }
     
     // ---- Returns an Admin object ----------------------------------------------------------
-    static async login(username, password) {
+    static async authenticate(username, password) {
         try {
             const result = await db.query('SELECT * FROM admins WHERE username = ?', [username]);
     

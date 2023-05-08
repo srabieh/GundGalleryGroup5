@@ -28,7 +28,7 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<form action="/client/create" method="POST">
+							<form action="/client/join" method="POST">
 								<label for="name">Name:</label>
 								<input type="text" name="name" id="username" required>
 								<br>
@@ -64,21 +64,20 @@
 			<%}%>
 			
 			<!-- Container Two (With Cards) -->
-			<% let filler = "interesting description" %>
 			<div class="container mx-auto">
 				<div class="row row-cols-5 g-4">
 					<a href = "/installation/1">
 						<div class="col">
-						<div class="card h-100">
-							<img src="/public/images/installation-1.png" class="card-img-top" alt="...">
-						</div>
+							<div class="card h-100">
+								<img src="/public/images/installation-1.png" class="card-img-top" alt="...">
+							</div>
 						</div>
 					</a>
 					<a href = "/installation/2">
 						<div class="col">
-						<div class="card h-100">
-							<img src="/public/images/installation-2.png" class="card-img-top" alt="...">
-						</div>
+							<div class="card h-100">
+								<img src="/public/images/installation-2.png" class="card-img-top" alt="...">
+							</div>
 						</div>
 					</a>
 					<a href = "installation/3">

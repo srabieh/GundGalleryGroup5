@@ -5,7 +5,6 @@ exports.index = async (req, res) => {
     if (req.cookies.admin_token) {
         try {
             const admin = jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET);
-
             return res.render('admin', { 
                 isAdmin: true, 
                 admin: admin, 
@@ -20,7 +19,6 @@ exports.index = async (req, res) => {
             });
         }
     }
-
     return res.render('admin', { 
         isAdmin: false, 
         admin: null,
@@ -28,19 +26,16 @@ exports.index = async (req, res) => {
     });
 };
 
-exports.login = async (req, res) => {
+exports.authenticate = async (req, res) => {
     const { username, password } = req.body;
-	
     try {
-        const admin = await Admin.login(username, password);
-
+        const admin = await Admin.authenticate(username, password);
         if (admin instanceof Admin) {
             const token = jwt.sign(JSON.stringify(admin), process.env.JWT_SECRET);
             return res.cookie('admin_token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-            })
-            .redirect('/admin');
+            }).redirect('/admin');
         } else {
             return res.render(`admin`, { isAdmin: false, error: admin });
         }
@@ -50,6 +45,5 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = async (req, res) => {
-    return res.clearCookie('admin_token')
-        .redirect('/admin');
+    return res.clearCookie('admin_token').redirect('/admin');
 };

@@ -3,7 +3,6 @@ const db = require('../db');
 
 //class definition
 class Installation {
-
 	constructor({id , work_name , artist, material_medium, date, info_short_desc}) {
 		this.id = id;
 		this.work_name = work_name;
@@ -17,7 +16,6 @@ class Installation {
 		try {
 			const rows = await db.query(`SELECT * FROM installations WHERE id = ?`, [id]);
 			if (rows.length > 0) {
-				console.log("Client ID was Found: " + rows[0].id);
 				return new Installation({...rows[0]});
 			} else {
 				console.log(`No installation ${id} found.`);
