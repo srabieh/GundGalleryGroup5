@@ -2,10 +2,12 @@
 
 /* set the background of the page to be gund gallery */
 body {
-  background-color: #F4F3EE;
+  background-image: url('/public/images/galleryOutside.jpg');
   background-size: cover;
   color: #242331;
   max-height:100vh;
+  height: 100vh;
+
 }
 
 .card {
@@ -27,7 +29,7 @@ body {
 }
 
 .menu {
-  background-color: #242331; 
+  background-color: #F4F3EE; 
   color: black;
 }
 
