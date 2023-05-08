@@ -76,24 +76,6 @@ class Installation {
 			return false;
 		}
 	}
-<<<<<<< HEAD
-	
-	//Get words from the database.
-	static async getResponses(installationID){
-		try{
-			const rows = await db.query(`SELECT * FROM wordcloud WHERE installation_id IN (?)`, [installationID]);
-			if(rows){
-				console.log(rows);
-				return rows;
-			}
-		} catch (err){
-			console.error(err);
-			throw err;
-		}
-	}
-
-=======
->>>>>>> 48a2d98 (big gone)
 }
 
 
