@@ -12,8 +12,9 @@ exports.get = async (req, res) => {
             
             const client = await Client.getById(token_data.id);
             const installation = await Installation.getById(id);
-            const comments = await Comment.getAllByInstallation(installation.id);
-
+            const comments = await Comment.getAllByInstallation(installation);
+			
+	
             if(installation instanceof Installation && client instanceof Client) {
                 return res.render("installation", { installation: installation, client: client, comments: comments });
             }
@@ -69,14 +70,14 @@ exports.getResponses = async (req, res) => {
 }
 
 exports.delete = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.body;
     try {
-    const result = await db.query('DELETE FROM installations WHERE id = ?', [id]);
-    if (result.affectedRows === 1) {
-        return res.status(200).send({ message: `Installation with ID ${id} deleted successfully.` });
-    } else {
-        return res.status(404).send({ message: `Installation with ID ${id} not found.` });
-    }
+        const result = await Installation.delete(id);
+        if (result) {
+            return res.status(200).redirect(req.get('referer'));
+        } else {
+            return res.render('error', { error: 'Installation with ID ${id} not found.' });
+        }
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Internal server error.' });
@@ -84,17 +85,17 @@ exports.delete = async (req, res) => {
 }
 
 exports.create = async (req, res) => {
-    const { work_name, artist, material_medium, date, info_short_desc } = req.body;
     try {
-        const result = await db.query('INSERT INTO installations (work_name, artist, material_medium, date, info_short_desc) VALUES (?, ?, ?, ?, ?)', [work_name, artist, material_medium, date, info_short_desc]);
-        if (result.affectedRows === 1) {
-            return res.status(201).send({ message: 'Installation created successfully.' });
+        const result = await Installation.create({...req.body, image: req.file.filename});
+        if (result) {
+            return res.status(200).redirect(req.get('referer'));
         } else {
-            return res.status(500).send({ message: 'Error occurred while creating the installation.' });
+            return res.render('error', { error: 'Installation with ID ${id} not found.' });
         }
     } catch (err) {
         console.error(err);
         return res.status(500).send({ message: 'Internal server error.' });
     }
 }
+
 

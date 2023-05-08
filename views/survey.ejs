@@ -11,9 +11,9 @@
 </head>
 
 <body>
-  <div class="container h-100">
+  <div class="container">
     <% if (!isClient) { %>
-      <div class="row h-100 justify-content-center align-items-center">
+      <div class="row justify-content-center align-items-center">
         <div class="col-6 p-5 menu m-2">
           <h1 class="text-center mb-4 header">Welcome to Gund Gallery</h1>
           <form action="/client/join" method="POST">
@@ -45,11 +45,11 @@
       <% let lastDate = (new Date(client.last_submission_date)).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10); %>
       <div class="h-100">
         <% if(lastDate != (new Date()).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10)) {%>
-          <div class="text-center mt-5 p-4 header">
+          <div class="text-center pt-5 p-4 header">
             <h1>Welcome back to Gund Gallery, <span style="color:#588157;"><%= client.name %></span></h1>
           </div>
         <%} else {%>
-          <div class="text-center p-4 mt-5 header">
+          <div class="text-center p-4 pt-5 header">
             <h1>Welcome to Gund Gallery, <span style="color:#588157;"><%= client.name %></span>!</h1>
           </div>
         <% } %>
@@ -59,10 +59,15 @@
           <% installations.forEach((install) => { %>
             <a href="/installation/<%= install.id %>" class="col">
                 <div class="card h-100">
-                  <img src="/public/images/installation-<%= install.id %>.png" class="card-img-top" alt="...">
+                  <img src="/public/images/<%= install.image ? install.image : 'installation-'+install.id+'.png' %>" class="card-img-top" alt="...">
                 </div>
             </a>
           <% }); %>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 mt-5">
+          <form action="/client/logout" method="POST">
+            <button type="submit">Logout</button>
+          </form>
         </div>
       </div>
     <% } %>

@@ -6,9 +6,13 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="/public/css/installations.css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="/public/css/installations.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+		<script>
+			const INSTALL_IMAGE = "<%= installation.image ? installation.image : 'installation-'+installation.id+'.png' %>";
+			const COMMENTS = "<%= comments.map((comment) =>{ return comment ?  comment.response_text : ''; }).join(); %>";
+		</script>
 		<script src="/public/js/wordCloud.js"></script>
 	</head>
 
@@ -17,19 +21,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-4 mt-5 p-4">
-				<img src="/public/images/installation-<%= installation.id %>.png" class="img-fluid" alt="Column 1" style="display: block; margin: 0 auto;">
+				<img src="/public/images/<%= installation.image ? installation.image : 'installation-'+installation.id+'.png' %>" class="img-fluid" alt="Column 1" style="display: block; margin: 0 auto;">
 				<p class="text-center p-3"> <b> <%= installation.work_name %> </b> </p>
 			</div>
 			<div class="col-12 col-md-4 mt-5">
 				<p class="text-left"> <b> Artist: </b> <%= installation.artist %></p>
 				<p class="text-left"> <b> Material: </b> <%= installation.material_medium %></p>
 				<p class="text-left"> <b> Info: </b> <%= installation.info_short_desc %></p>
-							    <!-- Modal Button -->
-			<div class="text-center mt-5">
 			  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#surveyModal" style="background-color: black">
 				Share Thoughts
 			  </button>
-			</div>
 			</div>
 			<div class="col-12 col-md-4 mt-5" id="sketch">
 			</div>

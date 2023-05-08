@@ -1,17 +1,18 @@
 //including object to connect to db
 const db = require('../db');
 
-//class definition
+// class definition
 class Installation {
-	constructor({id , work_name , artist, material_medium, date, info_short_desc}) {
+	constructor({id , work_name , artist, material_medium, date, info_short_desc, image }) {
 		this.id = id;
 		this.work_name = work_name;
 		this.artist = artist;
 		this.material_medium = material_medium;
 		this.date = date;
 		this.info_short_desc = info_short_desc;
+		this.image = image;
 	}
-
+	
 	static async getAll() {
 		try {
 			const rows = await db.query(`SELECT * FROM installations`, []);
@@ -31,11 +32,12 @@ class Installation {
 		}
 	}
 
+
 	static async getById(id) {
 		try {
 			const rows = await db.query(`SELECT * FROM installations WHERE id = ?`, [id]);
 			if (rows.length > 0) {
-				return new Installation({...rows[0]});
+				return new Installation(rows[0]);
 			} else {
 				console.log(`No installation ${id} found.`);
 				return null;
@@ -44,10 +46,38 @@ class Installation {
 			console.error(err);
 			throw err;
 		}
+		return false;
 	}
 	
+	static async create({ work_name, artist, material_medium, date, info_short_desc, image }) {
+		try {
+			const result = await db.query('INSERT INTO installations (work_name, artist, material_medium, date, info_short_desc, image) VALUES (?, ?, ?, ?, ?, ?)', [work_name, artist, material_medium, date, info_short_desc, image]);
+			if (result.affectedRows === 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (err) {
+			console.error(err);
+			return false;
+		}
+	}
 	
-	//Push words into database.
+	static async delete(id) { 
+		try {
+			console.log("delete ID: " +id)
+			const result = await db.query('DELETE FROM installations WHERE id = ?', [id]);
+			if (result.affectedRows === 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (err) {
+			console.error(err);
+			return false;
+		}
+	}
+	
 	static async pushWords(clientID, installationID , wordOne, wordTwo, wordThree){
 		const wordsSmashed = wordOne + " " + wordTwo + " " + wordThree;
 		console.log(wordsSmashed);
@@ -75,7 +105,6 @@ class Installation {
 			throw err;
 		}
 	}
-
 }
 
 
