@@ -1,0 +1,45 @@
+<!-- views/login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel <%= isAdmin ? ` | ${admin.username}` : ' | Login'%></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <% if (!isAdmin) { %>
+        <h1>Login</h1>
+        <form action="/admin/login" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
+            <br>
+            <button type="submit">Login</button>
+            <%= error ? error : '' %>
+        </form>
+    <% } else { %>
+        <p>Hi, <%= admin.username %> </p>
+        <ul class="wordList">
+            
+        </ul>
+        <form action="/admin/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    <% } %>
+    <script>
+        const wordList = $(".wordList")[0];
+        fetch("http://3.22.149.75:5000/admin/getAllWords")
+            .then((res) => {
+                return res.json();
+            })
+            .then((words) => {
+                words.forEach((word) => {
+                    wordList.append(`<li>${word}</li>`)
+                });
+            })
+    </script>
+</body>
+</html>

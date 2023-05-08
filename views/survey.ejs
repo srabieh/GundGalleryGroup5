@@ -11,43 +11,34 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container h-100">
     <% if (!isClient) { %>
-    <!-- Modal Button -->
-    <div class="text-center mt-5">
-      <h1 class="mb-4">Welcome to Gund Gallery</h1>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#surveyModal" style="background-color: black">
-        Get Started
-      </button>
-    </div>
-    <div class="modal fade" id="surveyModal" tabindex="-1" aria-labelledby="surveyModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-          <div class="modal-header">
-            <h5 class="modal-title" id="surveyModalLabel">Please provide us with some basic information</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="/client/join" method="POST">
-              <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" name="name" id="username" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="age" class="form-label">Age:</label>
-                <input type="number" name="age" id="age" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="gender" class="form-label">Gender:</label>
-                <input type="text" name="gender" id="gender" class="form-control" required>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-          </div>
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-6 p-5 menu m-2">
+          <h1 class="text-center mb-4 header">Welcome to Gund Gallery</h1>
+          <form action="/client/join" method="POST">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" name="name" id="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input type="number" name="age" id="age" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+                <select name="gender" id="gender" class="form-control" required>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Prefer not to say</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
       </div>
     </div>
@@ -63,16 +54,16 @@
     </div>
     <% } %>
 
-    <!-- Container Two (With Cards) -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-5">
-      <% installations.forEach((install) => { %>
-        <a href="/installation/<%= install.id %>" class="col">
-            <div class="card h-100">
-            <img src="/public/images/installation-<%= install.id %>.png" class="card-img-top" alt="...">
-            </div>
-        </a>
-      <% }); %>
-    </div>
+      <!-- Container Two (With Cards) -->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mt-5">
+        <% installations.forEach((install) => { %>
+          <a href="/installation/<%= install.id %>" class="col">
+              <div class="card h-100">
+              <img src="/public/images/installation-<%= install.id %>.png" class="card-img-top" alt="...">
+              </div>
+          </a>
+        <% }); %>
+      </div>
     <% } %>
   </div>
 
