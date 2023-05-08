@@ -23,7 +23,7 @@ class Client {
 			
 			const sql = 'INSERT INTO clients (name, email, age, gender, last_submission_date) VALUES (?, ?, ?, ?, ?)';
 			const date = new Date();
-			const formattedDate = date.toISOString().slice(0, 19).replace('T', ' ');
+			const formattedDate = date.toISOString().slice(0, 19).replace('T', ' ').slice(0, 10);
 			const params = [clientData.name, clientData.email, clientData.age, clientData.gender, formattedDate];
 			
 			try {

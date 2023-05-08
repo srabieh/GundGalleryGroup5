@@ -15,7 +15,7 @@
     <% if (!isClient) { %>
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-6 p-5 menu m-2">
-          <h1 class="text-center mb-4">Welcome to Gund Gallery</h1>
+          <h1 class="text-center mb-4 header">Welcome to Gund Gallery</h1>
           <form action="/client/join" method="POST">
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
@@ -42,12 +42,13 @@
         </div>
       </div>
     <% } else { %>
-      <% if(client.last_submission_date != (new Date())) {%>
-        <div class="text-center mt-5">
-          <h1>Welcome back to the Gallery, <%= client.name %></h1>
+      <% let lastDate = (new Date(client.last_submission_date)).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10); %>
+      <% if(lastDate != (new Date()).toISOString().slice(0, 19).replace('T', ' ').slice(0, 10)) {%>
+        <div class="text-center mt-5 p-4 header">
+          <h1>Welcome back to Gund Gallery, <%= client.name %>!</h1>
         </div>
       <%} else {%>
-        <div class="text-center mt-5">
+        <div class="text-center p-4 mt-5">
           <h1>Welcome to Gund Gallery, <%= client.name %>. Enjoy your visit!</h1>
         </div>
       <% } %>
