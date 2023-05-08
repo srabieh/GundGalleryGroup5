@@ -2,7 +2,6 @@
 
 /* set the background of the page to be gund gallery */
 body {
-  background-image: url('/public/images/galleryOutside.jpg');
   background-size: cover;
   color: #242331;
   max-height:100vh;
