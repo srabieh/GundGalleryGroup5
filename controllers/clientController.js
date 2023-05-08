@@ -10,8 +10,7 @@ exports.index = async (req, res) => {
 	return res.status(401);
 }
 
-// ---- Create a client and login --------------------------------------------------------
-exports.createClient = async (req , res) => {
+exports.create = async (req , res) => {
 	const { name , email , age , gender } = req.body;
 	try {		
 		const client = await Client.newClient({ name, email, age, gender });
@@ -29,9 +28,3 @@ exports.createClient = async (req , res) => {
 		return res.redirect("/survey");
 	}
 }
-
-// ---- Log client out -------------------------------------------------------------------
-exports.logout = async (req, res) => {
-    return res.clearCookie("access_token")
-        .redirect("/");
-};

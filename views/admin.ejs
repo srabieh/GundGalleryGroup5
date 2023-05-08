@@ -22,24 +22,10 @@
             </form>
         <% } else { %>
             <p>Hi, <%= admin.username %> </p>
-            <ul class="wordList">
-            </ul>
+
             <form action="/admin/logout" method="POST">
                 <button type="submit">Logout</button>
             </form>
-        
-            <script>
-                let wordList = $(".wordList");
-                fetch("https://3.22.149.75/admin/getAllWords")
-                    .then((res) => {
-                        return res.json();
-                    })
-                    .then((words) => {
-                        words.forEach((word) => {
-                            wordList.append("<li>"+JSON.stringify(word)+"</li>");
-                        });
-                    });
-            </script>
         <% } %>
     </body>
 </html>

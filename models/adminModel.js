@@ -25,17 +25,6 @@ class Admin {
             throw error;
         }
     }
-    
-    // todo: should probably return an array of word models.
-    async getAllWords() {
-        try {
-            const result = await db.query('SELECT * FROM words');
-            return result;
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    }
 };
 
 exports.Admin = Admin;

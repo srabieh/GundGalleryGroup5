@@ -5,8 +5,6 @@ const clientController = require('../controllers/clientController');
 
 router.get('/', clientController.index);
 
-// ---- Create new clients or get existing client ---------------------------------------------------------------
-router.post('/createClient', clientController.createClient)
-router.post('/logout', clientController.logout);
+router.post('/create', clientController.create)
 
 module.exports = router;
