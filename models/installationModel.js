@@ -24,6 +24,7 @@ class Installation {
 			console.error(error);
 			throw error;
 		}
+		return false;
 	};	
 
 	static async getById(id) {

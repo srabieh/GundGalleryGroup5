@@ -15,12 +15,9 @@ class Client {
 	// Function to create a new client when someone comes on to take the survey.
 	static async newClient(clientData) {
 		try {
-			let client = await Client.getClientRowByEmail(clientData.email);
+			const client = await Client.getByEmail(clientData.email);
 
 			if(client) { 
-				console.log("Client already exists in database");
-				console.log(client);
-				// ---- check if submission date is diff from today --------------------------------------
 				return client; 
 			}
 			
@@ -29,8 +26,7 @@ class Client {
 			
 			try {
 				const insert = await db.query(sql, params);
-				const client = await Client.getClientRowByEmail(clientData.email);
-				console.log(clientData.name + " has been added to the database");
+				const client = await Client.getByEmail(clientData.email);
 				return client;
 			} catch (err) {
 				console.error(err);
@@ -42,11 +38,11 @@ class Client {
 		}
 	}
 
-	static async getClientRowByEmail(email) {
+	static async getByEmail(email) {
 		try {
 			const rows = await db.query(`SELECT * FROM clients WHERE email = ?`, [email]);
 			if (rows.length > 0) {
-				return new Client({...rows[0]});
+				return new Client(rows[0]);
 			} else {
 				return null;
 			}

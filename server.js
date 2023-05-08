@@ -50,34 +50,28 @@ app.use('/installation', installationRoutes);
 app.use('/word', wordRoutes);
 
 // Serve index.ejs
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.render('index');
 });
 
-app.get('/survey', (req, res) => {
+app.get('/survey', async (req, res) => {
     if (req.cookies.access_token) {
         try {
-            const client = new Client(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+            const token_data = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
+            const client = await Client.getByEmail(token_data.email);
 
             return res.render("survey", { 
-                isClient: true, 
-                client: client, 
-                error: null
+                isClient: client instanceof Client, 
+                client: client
             });
         } catch(err) {
             console.log(err);
-            return res.render("survey", { 
-                isClient: false, 
-                client: null,
-                error: "Invalid token. Please login again."
-            });
         }
     }
 
     return res.render("survey", { 
         isClient: false, 
-        client: null,
-        error: null
+        client: null
     });
 });
 

@@ -14,5 +14,6 @@ exports.index = async (req, res) => {
         console.log(error);
         return res.redirect("/");
     }
+    res.redirect("/survey");
 }
 

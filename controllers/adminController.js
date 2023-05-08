@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 
 // ---- Index (/admin) (token auth) -----------------------------------------------
 exports.index = async (req, res) => {
-    if (req.cookies.access_token) {
+    if (req.cookies.admin_token) {
         try {
-            const admin = new Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+            const token_data = jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET);
 
             return res.render("admin", { 
                 isAdmin: true, 
@@ -33,12 +33,12 @@ exports.index = async (req, res) => {
 exports.getAllWords = async (req, res) => {
     res.set("Access-Control-Allow-Origin", "*");
 
-    if (!req.cookies.access_token) {
+    if (!req.cookies.admin_token) {
         return res.redirect("/");
     }
 
     try {
-        const admin = new Admin(jwt.verify(req.cookies.access_token, process.env.JWT_SECRET));
+        const admin = new Admin(jwt.verify(req.cookies.admin_token, process.env.JWT_SECRET));
         const words = await admin.getAllWords();
         return res.json(words);
     } catch {
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
 
         if (admin instanceof Admin) {
             const token = jwt.sign(JSON.stringify(admin), process.env.JWT_SECRET);
-            return res.cookie("access_token", token, {
+            return res.cookie("admin_token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
             })
@@ -70,6 +70,6 @@ exports.login = async (req, res) => {
 
 // ---- Logout (/admin/logout) ---------------------------------------------------------------------------
 exports.logout = async (req, res) => {
-    return res.clearCookie("access_token")
+    return res.clearCookie("admin_token")
         .redirect("/admin");
 };
