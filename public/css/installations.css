@@ -2,3 +2,7 @@ body {
   background-color: beige;
   background-size: cover;
 }
+
+#wordcloud-container {
+  overflow: hidden;
+}

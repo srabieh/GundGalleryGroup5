@@ -20,7 +20,7 @@ function getCurrentURL () {
 }
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(400, 400);
 
   response = sourceText.join(' ');
   textFont("Courier-Bold");
