@@ -18,3 +18,8 @@ exports.join = async (req , res) => {
 		return res.redirect("/");
 	}
 }
+
+
+exports.logout = async (req, res) => {
+    return res.clearCookie('access_token').redirect('/');
+};

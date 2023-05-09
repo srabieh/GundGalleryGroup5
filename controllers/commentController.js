@@ -19,7 +19,7 @@ exports.create = async (req , res) => {
             });
             const status = await comment.insert(); 
             
-            
+            return res.status(200).redirect(req.get('referer'));;
         } catch(error){
             console.log(error);
             return res.redirect("/");

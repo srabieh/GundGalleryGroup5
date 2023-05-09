@@ -8,6 +8,8 @@ const upload = multer({ dest: __dirname + '/../public/images/' });
 
 router.post("/", upload.single('image'), installationController.create);
 router.post("/delete", installationController.delete);
+router.post("/threewords", installationController.pushWords);
+
 
 router.get('/:id', installationController.get);
 router.get('/:id/getResponses' , installationController.getResponses)

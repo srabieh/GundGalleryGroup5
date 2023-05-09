@@ -65,6 +65,7 @@ class Installation {
 	
 	static async delete(id) { 
 		try {
+			console.log("delete ID: " +id)
 			const result = await db.query('DELETE FROM installations WHERE id = ?', [id]);
 			if (result.affectedRows === 1) {
 				return true;
@@ -74,6 +75,34 @@ class Installation {
 		} catch (err) {
 			console.error(err);
 			return false;
+		}
+	}
+	
+	static async pushWords(clientID, installationID , wordOne, wordTwo, wordThree){
+		const wordsSmashed = wordOne + " " + wordTwo + " " + wordThree;
+		console.log(wordsSmashed);
+		const sql = 'INSERT INTO wordcloud (client_id, installation_id, words) VALUES (?, ?, ?)';
+		const params = [clientID, installationID, wordsSmashed];
+		try{
+			const insert = await db.query(sql , params);
+		} catch (err){
+			console.error(err);
+			throw err;
+		}
+
+	}
+	
+	//Get words from the database.
+	static async getResponses(installationID){
+		try{
+			const rows = await db.query(`SELECT * FROM wordcloud WHERE installation_id IN (?)`, [installationID]);
+			if(rows){
+				console.log(rows);
+				return rows;
+			}
+		} catch (err){
+			console.error(err);
+			throw err;
 		}
 	}
 }
