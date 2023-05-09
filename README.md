@@ -18,6 +18,7 @@ This project provides an immersive experience of the Gund Gallery, using p5.js f
 
 - Node.js (https://nodejs.org/)
 - A modern web browser
+- Your own VM, with phpMyAdmin installed
 
 ### Installation
 
@@ -32,22 +33,18 @@ git clone https://github.com/srabieh/GundGalleryGroup5.git
 ```
 cd GundGalleryGroup5
 ```
+3. On your VM's phpMyAdmin, create a database called **gund**
 
-3. Install the dependencies:
+4. In your database **gund**, import the `db.sql` file on this repo
 
-```
-npm install
-```
+5. Create a .env file that follows the guideline set in exampleEnv.txt
 
-4. Start the development server:
+6. Two ways to install dependencies and start the server:
 
-```
-npm start
-```
+```npm install```, then ```npm start```
+or just ```make```
 
-5. Open your web browser and visit `http://localhost:5000` to experience the Gund Gallery Immersive project.
-
-6. Make sure that you have created a .env file that follows the guideline set in exampleEnv.txt  
+7. Open your web browser and visit `http://localhost:5000` to access your Gund Gallery Immersive Experience. 
 
 ## Project Structure
 ```
@@ -168,7 +165,5 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 # Mirrors
 Grant's Mirror: http://18.116.8.156:5000/  
-Ricky's Mirror: http://3.22.149.75:5000/  
-Sam Rabieh's Mirror:  
-Samyak's Mirror:  
-Vishad's Mirror:  
+Ricky's Mirror: http://3.22.149.75/
+Sam's Mirror: http://34.229.136.9:5000/
