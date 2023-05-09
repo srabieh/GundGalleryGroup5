@@ -2,6 +2,8 @@
 
 This project provides an immersive experience of the Gund Gallery, using p5.js for interactive visualizations and a Node.js server with Socket.io and RESTful APIs.
 
+Our team made this project for the final lab of Kenyon College's Spring 2023 Software Development class, and comprised Ricky Alvarez, Grant Culbertson, Vishad Onta, Sam Rabieh, and Sammy Shrestha.
+
 ## Overview
 
 1. **Begin your Immersive Gund Gallery Experience!** - Browse through the virtual gallery and enjoy the interactive features for each artwork.
