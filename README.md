@@ -41,8 +41,9 @@ cd GundGalleryGroup5
 
 6. Two ways to install dependencies and start the server:
 
-```npm install```, then ```npm start```
-or just ```make```
+    ```npm install```, then ```npm start```
+    
+    or just ```make```
 
 7. Open your web browser and visit `http://localhost:5000` to access your Gund Gallery Immersive Experience. 
 
