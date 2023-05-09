@@ -47,6 +47,8 @@ npm start
 
 5. Open your web browser and visit `http://localhost:5000` to experience the Gund Gallery Immersive project.
 
+6. Make sure that you have created a .env file that follows the guideline set in exampleEnv.txt  
+
 ## Project Structure
 ```
 GundGalleryGroup5
