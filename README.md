@@ -37,7 +37,8 @@ cd GundGalleryGroup5
 
 4. In your database **gund**, import the `db.sql` file on this repo
 
-5. Create a .env file that follows the guideline set in exampleEnv.txt
+5. Create a .env file in the project directory that follows the guideline set in exampleEnv.txt
+    ```nano .env```
 
 6. Two ways to install dependencies and start the server:
 
