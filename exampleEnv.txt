@@ -1,0 +1,5 @@
+DB_USERNAME = 'username'
+DB_PASSWORD = 'password'
+HOST = 'localhost'
+PORT = 5000
+JWT_SECRET = 'ReallyCoolWord'
